@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d1322">
+<title>Dragonchess</title>
+<link rel="icon" href="/*FAVICON*/">
+<style>
+/*CSS*/
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>/*SYMBOLS*/</defs></svg>
+<div id="app">
+  <header id="top">
+    <h1>Dragonchess</h1>
+    <nav>
+      <button id="bNew" type="button">New</button>
+      <button id="bUndo" type="button">Undo</button>
+      <button id="bFlip" type="button">Flip</button>
+      <button id="bSound" type="button">Sound</button>
+      <button id="bGuide" type="button">Guide</button>
+    </nav>
+  </header>
+  <main id="main">
+    <section id="play">
+      <div id="status"><span id="turnTok"></span><span id="statusText"></span><span id="spin" hidden></span></div>
+      <div id="info">Tap a piece to see where it can go.</div>
+      <div id="boards"></div>
+    </section>
+    <aside id="panel">
+      <div id="matchup"></div>
+      <h2>Captured</h2>
+      <div id="capS" class="caps"></div>
+      <div id="capG" class="caps"></div>
+      <h2>Moves</h2>
+      <ol id="movelist"></ol>
+    </aside>
+  </main>
+</div>
+
+<div id="dlgNew" class="modal" hidden>
+  <div class="card">
+    <h2>New game</h2>
+    <div class="row" id="optMode">
+      <button type="button" data-v="ai">vs Computer</button>
+      <button type="button" data-v="2p">Two players</button>
+    </div>
+    <div id="aiOpts">
+      <h3>Play as</h3>
+      <div class="row" id="optSide">
+        <button type="button" data-v="1">Gold (first)</button>
+        <button type="button" data-v="-1">Scarlet</button>
+        <button type="button" data-v="0">Random</button>
+      </div>
+      <h3>Difficulty</h3>
+      <div class="row" id="optLevel"></div>
+      <p id="levelNote" class="note"></p>
+    </div>
+    <div class="row end">
+      <button type="button" id="newCancel" class="ghost">Cancel</button>
+      <button type="button" id="newStart" class="primary">Start</button>
+    </div>
+  </div>
+</div>
+
+<div id="dlgOver" class="modal" hidden>
+  <div class="card center">
+    <h2 id="overTitle"></h2>
+    <p id="overText"></p>
+    <div class="row end">
+      <button type="button" id="overClose" class="ghost">View board</button>
+      <button type="button" id="overNew" class="primary">New game</button>
+    </div>
+  </div>
+</div>
+
+<div id="dlgGuide" class="modal" hidden>
+  <div class="card wide">
+    <div class="row between"><h2>How to play</h2><button type="button" id="guideClose" class="ghost">Close</button></div>
+    <div id="guideBody"></div>
+  </div>
+</div>
+
+<script id="engine-src">
+/*ENGINE*/
+</script>
+<script>
+/*SFX*/
+</script>
+<script>
+var GUIDE = /*GUIDE*/;
+/*UI*/
+</script>
+</body>
+</html>
