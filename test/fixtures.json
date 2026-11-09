@@ -1,0 +1,2144 @@
+[
+  {
+    "piece": "Sylph",
+    "letter": "S",
+    "group": "plain",
+    "from": {
+      "level": 3,
+      "file": 3,
+      "rank": 4
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 2,
+        "rank": 5,
+        "mark": "m"
+      },
+      {
+        "level": 3,
+        "file": 3,
+        "rank": 5,
+        "mark": "c"
+      },
+      {
+        "level": 3,
+        "file": 4,
+        "rank": 5,
+        "mark": "m"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 4,
+        "mark": "c"
+      }
+    ]
+  },
+  {
+    "piece": "Sylph",
+    "letter": "S",
+    "group": "bracket",
+    "from": {
+      "level": 2,
+      "file": 9,
+      "rank": 3
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 9,
+        "rank": 3,
+        "mark": "m"
+      },
+      {
+        "level": 3,
+        "file": 0,
+        "rank": 1,
+        "mark": "m"
+      },
+      {
+        "level": 3,
+        "file": 2,
+        "rank": 1,
+        "mark": "m"
+      },
+      {
+        "level": 3,
+        "file": 4,
+        "rank": 1,
+        "mark": "m"
+      },
+      {
+        "level": 3,
+        "file": 6,
+        "rank": 1,
+        "mark": "m"
+      },
+      {
+        "level": 3,
+        "file": 8,
+        "rank": 1,
+        "mark": "m"
+      },
+      {
+        "level": 3,
+        "file": 10,
+        "rank": 1,
+        "mark": "m"
+      }
+    ]
+  },
+  {
+    "piece": "Griffin",
+    "letter": "G",
+    "group": "plain",
+    "from": {
+      "level": 3,
+      "file": 3,
+      "rank": 4
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 1,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 5,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 0,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 6,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 0,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 6,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 1,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 5,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 3,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Griffin",
+    "letter": "G",
+    "group": "bracket",
+    "from": {
+      "level": 2,
+      "file": 10,
+      "rank": 1
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 9,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 11,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 9,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 11,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 11,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 11,
+        "rank": 0,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Dragon",
+    "letter": "R",
+    "group": "plain",
+    "from": {
+      "level": 3,
+      "file": 5,
+      "rank": 4
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 2,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 8,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 3,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 7,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 4,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 5,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 6,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 4,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 6,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 4,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 5,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 6,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 3,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 7,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 2,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 8,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 1,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 9,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 5,
+        "mark": "a"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 4,
+        "mark": "a"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 4,
+        "mark": "a"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 4,
+        "mark": "a"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 3,
+        "mark": "a"
+      }
+    ]
+  },
+  {
+    "piece": "Oliphant",
+    "letter": "O",
+    "group": "plain",
+    "from": {
+      "level": 2,
+      "file": 5,
+      "rank": 4
+    },
+    "marks": [
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 0,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 1,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 7,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 8,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 10,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 11,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 0,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Unicorn",
+    "letter": "U",
+    "group": "plain",
+    "from": {
+      "level": 2,
+      "file": 5,
+      "rank": 3
+    },
+    "marks": [
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 7,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 7,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 1,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Hero",
+    "letter": "H",
+    "group": "brace",
+    "from": {
+      "level": 3,
+      "file": 10,
+      "rank": 6
+    },
+    "marks": [
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 11,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 11,
+        "rank": 5,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Hero",
+    "letter": "H",
+    "group": "plain",
+    "from": {
+      "level": 2,
+      "file": 2,
+      "rank": 5
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 1,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 3,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 1,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 3,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 0,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 1,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 1,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 0,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 1,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 3,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 1,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 3,
+        "rank": 4,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Hero",
+    "letter": "H",
+    "group": "bracket",
+    "from": {
+      "level": 1,
+      "file": 10,
+      "rank": 1
+    },
+    "marks": [
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 11,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 11,
+        "rank": 0,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Thief",
+    "letter": "T",
+    "group": "plain",
+    "from": {
+      "level": 2,
+      "file": 5,
+      "rank": 3
+    },
+    "marks": [
+      {
+        "level": 2,
+        "file": 1,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 8,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 7,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 7,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 8,
+        "rank": 0,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Cleric",
+    "letter": "C",
+    "group": "plain",
+    "from": {
+      "level": 3,
+      "file": 1,
+      "rank": 6
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 0,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 1,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 2,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 0,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 2,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 0,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 1,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 2,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 1,
+        "rank": 6,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Cleric",
+    "letter": "C",
+    "group": "bracket",
+    "from": {
+      "level": 2,
+      "file": 4,
+      "rank": 1
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 4,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 4,
+        "rank": 1,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Cleric",
+    "letter": "C",
+    "group": "brace",
+    "from": {
+      "level": 1,
+      "file": 10,
+      "rank": 1
+    },
+    "marks": [
+      {
+        "level": 2,
+        "file": 10,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 9,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 10,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 11,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 9,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 11,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 9,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 10,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 11,
+        "rank": 0,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Mage",
+    "letter": "M",
+    "group": "bracket",
+    "from": {
+      "level": 3,
+      "file": 1,
+      "rank": 6
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 1,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 0,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 2,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 1,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 1,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 1,
+        "rank": 6,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Mage",
+    "letter": "M",
+    "group": "plain",
+    "from": {
+      "level": 2,
+      "file": 5,
+      "rank": 4
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 5,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 8,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 7,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 0,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 1,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 7,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 8,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 10,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 11,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 7,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 8,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 1,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 5,
+        "rank": 4,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Mage",
+    "letter": "M",
+    "group": "brace",
+    "from": {
+      "level": 1,
+      "file": 10,
+      "rank": 1
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 10,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 10,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 10,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 9,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 11,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 10,
+        "rank": 0,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "King",
+    "letter": "K",
+    "group": "bracket",
+    "from": {
+      "level": 3,
+      "file": 1,
+      "rank": 6
+    },
+    "marks": [
+      {
+        "level": 2,
+        "file": 1,
+        "rank": 6,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "King",
+    "letter": "K",
+    "group": "plain",
+    "from": {
+      "level": 2,
+      "file": 5,
+      "rank": 4
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 5,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 5,
+        "rank": 4,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "King",
+    "letter": "K",
+    "group": "brace",
+    "from": {
+      "level": 1,
+      "file": 9,
+      "rank": 4
+    },
+    "marks": [
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 3,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Paladin",
+    "letter": "P",
+    "group": "bracket",
+    "from": {
+      "level": 3,
+      "file": 2,
+      "rank": 5
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 1,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 2,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 3,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 1,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 3,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 1,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 2,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 3,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 0,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 2,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 1,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 3,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 2,
+        "rank": 4,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Paladin",
+    "letter": "P",
+    "group": "plain",
+    "from": {
+      "level": 2,
+      "file": 5,
+      "rank": 2
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 5,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 3,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 7,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 5,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 7,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 7,
+        "rank": 1,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 0,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 5,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 3,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 7,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 5,
+        "rank": 0,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Paladin",
+    "letter": "P",
+    "group": "brace",
+    "from": {
+      "level": 1,
+      "file": 9,
+      "rank": 5
+    },
+    "marks": [
+      {
+        "level": 3,
+        "file": 9,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 8,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 10,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 3,
+        "file": 9,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 7,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 7,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 11,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 8,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 9,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 10,
+        "rank": 6,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 8,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 10,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 8,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 9,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 10,
+        "rank": 4,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Warrior",
+    "letter": "W",
+    "group": "plain",
+    "from": {
+      "level": 2,
+      "file": 5,
+      "rank": 3
+    },
+    "marks": [
+      {
+        "level": 2,
+        "file": 4,
+        "rank": 4,
+        "mark": "c"
+      },
+      {
+        "level": 2,
+        "file": 5,
+        "rank": 4,
+        "mark": "m"
+      },
+      {
+        "level": 2,
+        "file": 6,
+        "rank": 4,
+        "mark": "c"
+      }
+    ]
+  },
+  {
+    "piece": "Basilisk",
+    "letter": "B",
+    "group": "plain",
+    "from": {
+      "level": 1,
+      "file": 5,
+      "rank": 3
+    },
+    "marks": [
+      {
+        "level": 1,
+        "file": 4,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 5,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 6,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 5,
+        "rank": 2,
+        "mark": "m"
+      }
+    ]
+  },
+  {
+    "piece": "Elemental",
+    "letter": "E",
+    "group": "bracket",
+    "from": {
+      "level": 2,
+      "file": 9,
+      "rank": 3
+    },
+    "marks": [
+      {
+        "level": 1,
+        "file": 9,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 8,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 10,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 9,
+        "rank": 2,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Elemental",
+    "letter": "E",
+    "group": "plain",
+    "from": {
+      "level": 1,
+      "file": 2,
+      "rank": 3
+    },
+    "marks": [
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 1,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 3,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 2,
+        "rank": 5,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 1,
+        "rank": 4,
+        "mark": "m"
+      },
+      {
+        "level": 1,
+        "file": 2,
+        "rank": 4,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 3,
+        "rank": 4,
+        "mark": "m"
+      },
+      {
+        "level": 1,
+        "file": 0,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 1,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 3,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 4,
+        "rank": 3,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 1,
+        "rank": 2,
+        "mark": "m"
+      },
+      {
+        "level": 1,
+        "file": 2,
+        "rank": 2,
+        "mark": "x"
+      },
+      {
+        "level": 1,
+        "file": 3,
+        "rank": 2,
+        "mark": "m"
+      },
+      {
+        "level": 1,
+        "file": 2,
+        "rank": 1,
+        "mark": "x"
+      }
+    ]
+  },
+  {
+    "piece": "Dwarf",
+    "letter": "D",
+    "group": "bracket",
+    "from": {
+      "level": 2,
+      "file": 9,
+      "rank": 2
+    },
+    "marks": [
+      {
+        "level": 2,
+        "file": 8,
+        "rank": 3,
+        "mark": "c"
+      },
+      {
+        "level": 2,
+        "file": 9,
+        "rank": 3,
+        "mark": "m"
+      },
+      {
+        "level": 2,
+        "file": 10,
+        "rank": 3,
+        "mark": "c"
+      },
+      {
+        "level": 2,
+        "file": 8,
+        "rank": 2,
+        "mark": "m"
+      },
+      {
+        "level": 2,
+        "file": 10,
+        "rank": 2,
+        "mark": "m"
+      },
+      {
+        "level": 1,
+        "file": 9,
+        "rank": 2,
+        "mark": "m"
+      }
+    ]
+  },
+  {
+    "piece": "Dwarf",
+    "letter": "D",
+    "group": "plain",
+    "from": {
+      "level": 1,
+      "file": 2,
+      "rank": 2
+    },
+    "marks": [
+      {
+        "level": 2,
+        "file": 2,
+        "rank": 2,
+        "mark": "c"
+      },
+      {
+        "level": 1,
+        "file": 1,
+        "rank": 3,
+        "mark": "c"
+      },
+      {
+        "level": 1,
+        "file": 2,
+        "rank": 3,
+        "mark": "m"
+      },
+      {
+        "level": 1,
+        "file": 3,
+        "rank": 3,
+        "mark": "c"
+      },
+      {
+        "level": 1,
+        "file": 1,
+        "rank": 2,
+        "mark": "m"
+      },
+      {
+        "level": 1,
+        "file": 3,
+        "rank": 2,
+        "mark": "m"
+      }
+    ]
+  }
+]

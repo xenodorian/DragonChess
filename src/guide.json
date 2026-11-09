@@ -1,0 +1,84 @@
+[
+  {"letter":"K","name":"King","value":null,"home":"Land","lines":[
+    "On Land, moves or captures one king step, or one level straight up or down to the same file and rank.",
+    "On Sky or Underworld, moves or captures only straight back to Land."
+  ]},
+  {"letter":"M","name":"Mage","value":11,"home":"Land","lines":[
+    "On Land, moves or captures like a queen.",
+    "On Land, may instead move or capture one level straight up or down.",
+    "On Sky or Underworld, moves or captures one step orthogonally.",
+    "On Sky or Underworld, may instead move or capture one or two levels straight up or down.",
+    "Two-level moves cannot pass through an occupied Land square."
+  ]},
+  {"letter":"P","name":"Paladin","value":10,"home":"Land","lines":[
+    "On Land, moves or captures like a king or a knight.",
+    "On Sky or Underworld, moves or captures like a king.",
+    "Between levels, moves or captures with an unblockable 3D knight leap.",
+    "The leap is one level plus two squares orthogonally, or two levels plus one square orthogonally."
+  ]},
+  {"letter":"C","name":"Cleric","value":9,"home":"Land","lines":[
+    "On any level, moves or captures one king step.",
+    "On any level, may instead move or capture one level straight up or down."
+  ]},
+  {"letter":"R","name":"Dragon","value":8,"home":"Sky","lines":[
+    "On Sky only, moves or captures like a bishop or a king.",
+    "Instead of moving, it may capture one enemy piece on Land remotely.",
+    "The target must be directly below the Dragon, or orthogonally next to that square.",
+    "The Dragon stays put when it captures remotely."
+  ]},
+  {"letter":"G","name":"Griffon","value":5,"home":"Sky","lines":[
+    "On Sky, leaps 2 and 3 squares like a zebra, and the leap cannot be blocked.",
+    "On Sky, may instead make a triagonal step down to Land.",
+    "A triagonal step goes to a square diagonally next to the square directly above or below.",
+    "On Land, moves or captures one step diagonally, or makes a triagonal step up to Sky."
+  ]},
+  {"letter":"O","name":"Oliphant","value":5,"home":"Land","lines":[
+    "On Land only, moves or captures like a rook.",
+    "It never moves or captures on Sky or Underworld."
+  ]},
+  {"letter":"H","name":"Hero","value":4.5,"home":"Land","lines":[
+    "On Land, moves or captures 1 or 2 steps diagonally.",
+    "On Land, may instead make a triagonal step to Sky or to Underworld.",
+    "On Sky or Underworld, the only move is a triagonal step back to Land."
+  ]},
+  {"letter":"T","name":"Thief","value":4,"home":"Land","lines":[
+    "On Land only, moves or captures like a bishop.",
+    "It never moves or captures on Sky or Underworld."
+  ]},
+  {"letter":"E","name":"Elemental","value":4,"home":"Underworld","lines":[
+    "On Underworld, moves or captures 1 or 2 squares orthogonally, without leaping.",
+    "On Underworld, moves without capturing 1 square diagonally.",
+    "On Underworld, captures only 1 square orthogonally, then up to Land.",
+    "The Underworld square passed through must be empty.",
+    "On Land, moves or captures down to Underworld, then 1 square orthogonally, if the square below is empty."
+  ]},
+  {"letter":"B","name":"Basilisk","value":3,"home":"Underworld","lines":[
+    "On Underworld only, moves or captures 1 square forward or diagonally forward.",
+    "On Underworld, moves without capturing 1 square straight back.",
+    "Freezes any enemy piece directly above it on Land.",
+    "A frozen piece cannot move or capture until the Basilisk moves or is captured."
+  ]},
+  {"letter":"U","name":"Unicorn","value":2.5,"home":"Land","lines":[
+    "On Land only, moves or captures like a knight.",
+    "It never moves or captures on Sky or Underworld."
+  ]},
+  {"letter":"D","name":"Dwarf","value":2,"home":"Underworld","lines":[
+    "Forward means toward the enemy's home rank.",
+    "On Underworld or Land, moves without capturing 1 square forward or 1 square sideways.",
+    "On Underworld or Land, captures 1 square diagonally forward.",
+    "On Underworld, may also capture straight up onto Land.",
+    "On Land, may also move without capturing straight down to Underworld."
+  ]},
+  {"letter":"S","name":"Sylph","value":1,"home":"Sky","lines":[
+    "On Sky, moves without capturing 1 square diagonally forward.",
+    "On Sky, captures 1 square straight forward, or 1 square straight down to Land.",
+    "On Land, moves without capturing straight up to Sky.",
+    "On Land, may instead move without capturing to any empty one of the owner's six Sylph starting squares.",
+    "Sylphs never promote."
+  ]},
+  {"letter":"W","name":"Warrior","value":1,"home":"Land","lines":[
+    "On Land only, moves without capturing 1 square straight forward, with no double step.",
+    "Captures 1 square diagonally forward.",
+    "Promotes to Hero on reaching the far rank."
+  ]}
+]
