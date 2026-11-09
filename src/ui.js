@@ -3,8 +3,8 @@
   var LEVELS = [
     { name: 'Novice', depth: 1, noise: 300, note: 'Looks one move ahead and blunders often. Good for learning the pieces.' },
     { name: 'Easy', depth: 2, noise: 140, note: 'Sees simple captures but makes frequent mistakes.' },
-    { name: 'Medium', depth: 2, noise: 20, note: 'Plays solid short tactics. Rarely gives pieces away.' },
-    { name: 'Hard', depth: 4, time: 3000, note: 'Searches several moves deep. Thinks for up to 3 seconds.' },
+    { name: 'Medium', depth: 3, noise: 20, note: 'Plays solid short tactics. Rarely gives pieces away.' },
+    { name: 'Hard', depth: 5, time: 3000, note: 'Searches several moves deep. Thinks for up to 3 seconds.' },
     { name: 'Expert', depth: 9, time: 8000, note: 'Deepest search. Thinks for up to 8 seconds per move.' }
   ];
   var REALM = ['', 'Underworld', 'Land', 'Sky'];
@@ -142,7 +142,7 @@
     var cw = ((wide ? W - 340 : W) - 16 - 18 - 6) / 12;
     var ch = (H - top - 3 * 6 - 2 * 8 - 8) / 24;
     var c = Math.floor(Math.min(cw, ch));
-    if (c < 24) c = Math.max(18, Math.floor(Math.min(cw, 24)));
+    if (c < 26) c = Math.max(18, Math.floor(Math.min(cw, 32))); // small screens: larger cells, page scrolls
     if (c > 64) c = 64;
     document.documentElement.style.setProperty('--cell', c + 'px');
   }

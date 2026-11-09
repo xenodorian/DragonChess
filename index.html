@@ -103,7 +103,7 @@ body.wide #panel{width:300px;margin-top:34px;display:flex;flex-direction:column;
 .caps .mini{position:relative;width:22px;height:22px}
 .caps .mini .piece{cursor:default;--cell:22px}
 #movelist{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:2.2em 1fr 1fr;gap:2px 6px;font:12.5px/1.5 ui-monospace,Consolas,Menlo,monospace;
-  max-height:220px;overflow:auto;-webkit-user-select:text;user-select:text}
+  max-height:220px;overflow:auto;align-content:start;grid-auto-rows:min-content;-webkit-user-select:text;user-select:text}
 body.wide #movelist{max-height:none;flex:1;min-height:80px}
 #movelist .n{color:var(--dim);text-align:right}
 #movelist .mv{padding:0 4px;border-radius:4px;white-space:nowrap}
@@ -137,8 +137,9 @@ body.wide #movelist{max-height:none;flex:1;min-height:80px}
 .gp ul{margin:0}
 .credits{font-size:12px;color:var(--dim);border-top:1px solid var(--line);padding-top:10px;margin-top:6px}
 .credits a{color:#9fc2ff}
-@media (max-width:480px){#top h1{font-size:15px;letter-spacing:.08em}#top nav{gap:4px}#top nav button{padding:6px 7px;font-size:12px}}
+@media (max-width:480px){#top{padding-left:8px;padding-right:8px}#top h1{font-size:13px;letter-spacing:.03em}#top nav{gap:3px}#top nav button{padding:6px 6px;font-size:12px}}
 @media (prefers-reduced-motion:reduce){.piece{transition:none}.cell.check,.cell.rem::before{animation:none}}
+#optLevel>button{flex:1 1 28%}
 
 </style>
 </head>
@@ -778,8 +779,8 @@ var GUIDE = [{"letter":"K","name":"King","value":null,"home":"Land","lines":["On
   var LEVELS = [
     { name: 'Novice', depth: 1, noise: 300, note: 'Looks one move ahead and blunders often. Good for learning the pieces.' },
     { name: 'Easy', depth: 2, noise: 140, note: 'Sees simple captures but makes frequent mistakes.' },
-    { name: 'Medium', depth: 2, noise: 20, note: 'Plays solid short tactics. Rarely gives pieces away.' },
-    { name: 'Hard', depth: 4, time: 3000, note: 'Searches several moves deep. Thinks for up to 3 seconds.' },
+    { name: 'Medium', depth: 3, noise: 20, note: 'Plays solid short tactics. Rarely gives pieces away.' },
+    { name: 'Hard', depth: 5, time: 3000, note: 'Searches several moves deep. Thinks for up to 3 seconds.' },
     { name: 'Expert', depth: 9, time: 8000, note: 'Deepest search. Thinks for up to 8 seconds per move.' }
   ];
   var REALM = ['', 'Underworld', 'Land', 'Sky'];
@@ -917,7 +918,7 @@ var GUIDE = [{"letter":"K","name":"King","value":null,"home":"Land","lines":["On
     var cw = ((wide ? W - 340 : W) - 16 - 18 - 6) / 12;
     var ch = (H - top - 3 * 6 - 2 * 8 - 8) / 24;
     var c = Math.floor(Math.min(cw, ch));
-    if (c < 24) c = Math.max(18, Math.floor(Math.min(cw, 24)));
+    if (c < 26) c = Math.max(18, Math.floor(Math.min(cw, 32))); // small screens: larger cells, page scrolls
     if (c > 64) c = 64;
     document.documentElement.style.setProperty('--cell', c + 'px');
   }
