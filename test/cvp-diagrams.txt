@@ -1,0 +1,476 @@
+Top board
+
+Sylph
+
+Moves as a Berolina pawn. When not capturing, it moves one space diagonally
+towards the opponent's side. It may capture by moving directly ahead one
+space towards the opponent's side. It may also capture by moving straight
+down to the middle board. 
+
+While on the middle board, the Sylph cannot move at all except to make
+a non-capturing move back to the top board. It may move to the cell directly
+above it OR any empty one of the six home cells that any friendly Sylph
+occupied at the start of the game. 
+
+Sylphs do NOT promote. 
+
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - m c m - - - - - - -    
+5   - - - S - - - - - - - -    
+4   - - - - - - - - -[m]- -      TOP (1)
+3   - - - - - - - - - - - -    
+2  [m]-[m]-[m]-[m]-[m]-[m]-    
+1   - - - - - - - - - - - -    
+        
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - - - c - - - - - - - -    
+4   - - - - - - - - -[S]- -      MIDDLE (2)
+3   - - - - - - - - - - - -    
+2   - - - - - - - - - - - -    
+1   - - - - - - - - - - - -    
+    a b c d e f g h i j k l
+
+
+
+Griffin
+
+While on the top board, the Griffin makes an unblockable move or capture
+three squares one direction and then two squares perpendicularly -- for
+example, a Griffin at 1a1 can move to 1c4 and 1d3. 
+
+A Griffin may make an unblockable move or capture from the top to the
+middle board by moving to any of the cells diagonally adjacent to the cell
+directly below it. 
+
+While on the middle board, the Griffin can move or capture one square
+diagonally, or return to the top board by making a unblockable move or
+capture to one of the cells diagonally adjacent to the cell above it. 
+
+8   - x - - - x - - - - - -    
+7   x - - - - - x - - - - -    
+6   - - - - - - - - - - - -    
+5   - - - G - - - - - - - -    
+4   - - - - - - - - - - - -      TOP (1)
+3   x - - - - - x - -[x]-[x]   
+2   - x - - - x - - - - - -    
+1   - - - - - - - - -[x]-[x]   
+        
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - x - x - - - - - - -    
+5   - - - - - - - - - - - -    
+4   - - x - x - - - - - - -      MIDDLE (2)
+3   - - - - - - - - -[x]-[x]   
+2   - - - - - - - - - -[G]-    
+1   - - - - - - - - -[x]-[x]   
+    a b c d e f g h i j k l
+
+
+Dragon
+
+The Dragon cannot move off the top board. It may move or capture with
+the power of a chess Bishop or King. 
+
+Instead of moving, the Dragon has the additional power of 'capturing
+from afar'. To do this, the Dragon does not move and one enemy piece that
+is either in the cell directly below the Dragon or orthogonally adjacent
+to the cell below the Dragon is removed from the board. The Dragon MAY
+NOT move and capture from afar in the same turn! 
+
+8   - - x - - - - - x - - -    
+7   - - - x - - - x - - - -    
+6   - - - - x x x - - - - -    
+5   - - - - x R x - - - - -    
+4   - - - - x x x - - - - -      TOP (1)
+3   - - - x - - - x - - - -    
+2   - - x - - - - - x - - -    
+1   - x - - - - - - - x - -    
+        
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - - - - a - - - - - -   
+5   - - - - a a a - - - - -    
+4   - - - - - a - - - - - -      MIDDLE (2)
+3   - - - - - - - - - - - -    
+2   - - - - - - - - - - - -    
+1   - - - - - - - - - - - -    
+    a b c d e f g h i j k l
+
+
+
+Middle board
+
+Oliphant
+
+Moves and captures exactly like a Rook in chess. It never leaves the
+middle board. 
+
+8   - - - - - x - - - - - -    
+7   - - - - - x - - - - - -    
+6   - - - - - x - - - - - -    
+5   x x x x x O x x x x x x    
+4   - - - - - x - - - - - -      MIDDLE (2)
+3   - - - - - x - - - - - -    
+2   - - - - - x - - - - - -    
+1   - - - - - x - - - - - -    
+    a b c d e f g h i j k l
+
+
+Unicorn
+
+Moves and captures exactly like a Knight in chess. It never leaves the
+middle board. 
+
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - - - x - x - - - - -    
+5   - - - x - - - x - - - -    
+4   - - - - - U - - - - - -      MIDDLE (2)
+3   - - - x - - - x - - - -    
+2   - - - - x - x - - - - -    
+1   - - - - - - - - - - - -    
+    a b c d e f g h i j k l
+
+
+Hero
+
+While on the middle board, the Hero may move or capture one or two cells
+diagonally, jumping over a piece of either color if necessary. The Hero
+can also move or capture to the top and bottom boards by making an unblockable
+move to a cell diagonally adjacent to the cell directly above or below
+it. While on the top or bottom board, the Hero cannot move except to return
+to the middle board by making an unblockable move or capture to a cell
+diagonally adjacent to the cell directly above or below it as the case
+may be. 
+
+8   - - - - - - - - - - - -    
+7   - x - x - - - - - -{H}-    
+6   - - - - - - - - - - - -    
+5   - x - x - - - - - - - -    
+4   - - - - - - - - - - - -      TOP (1)
+3   - - - - - - - - - - - -    
+2   - - - - - - - - - - - -    
+1   - - - - - - - - - - - -    
+        
+8   x - - - x - - - -{x}-{x}   
+7   - x - x - - - - - - - -    
+6   - - H - - - - - -{x}-{x}   
+5   - x - x - - - - - - - -    
+4   x - - - x - - - - - - -      MIDDLE (2)
+3   - - - - - - - - -[x]-[x]   
+2   - - - - - - - - - - - -    
+1   - - - - - - - - -[x]-[x]   
+
+8   - - - - - - - - - - - -    
+7   - x - x - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - x - x - - - - - - - -    
+4   - - - - - - - - - - - -      BOTTOM (3)
+3   - - - - - - - - - - - -    
+2   - - - - - - - - - -[H]-    
+1   - - - - - - - - - - - -    
+    
+    a b c d e f g h i j k l
+
+
+Thief
+
+Moves and captures exactly like a Bishop in chess. It never leaves the
+middle board. 
+
+8   - x - - - - - - - x - -    
+7   - - x - - - - - x - - -    
+6   - - - x - - - x - - - -    
+5   - - - - x - x - - - - -    
+4   - - - - - T - - - - - -      MIDDLE (2)
+3   - - - - x - x - - - - -    
+2   - - - x - - - x - - - -    
+1   - - x - - - - - x - - -    
+    a b c d e f g h i j k l
+
+
+Cleric
+
+The Cleric moves and captures exactly as a chess King does on whichever
+board it happens to be on. It may also move or capture to the cell directly
+above or below it. 
+
+8   x x x - - - - - - - - -    
+7   x C x - - - - - - - - -    
+6   x x x - - - - - - - - -    
+5   - - - - - - - - - - - -    
+4   - - - - - - - - - - - -      TOP (1)
+3   - - - - - - - - - - - -    
+2   - - - -[x]- - - - - - -    
+1   - - - - - - - - - - - -    
+        
+8   - - - - - - - - - - - -    
+7   - x - - - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - - - - - - - - - - - -    
+4   - - - - - - - - - - - -      MIDDLE (2)
+3   - - -[x x x]- - - - - -    
+2   - - -[x[C]x]- - - -{x}-    
+1   - - -[x x x]- - - - - -    
+
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - - - - - - - - - - - -    
+4   - - - - - - - - - - - -      BOTTOM (3)
+3   - - - - - - - - -{x x x}   
+2   - - - -[x]- - - -{x{C}x}   
+1   - - - - - - - - -{x x x}   
+    
+    a b c d e f g h i j k l
+
+
+Mage
+
+The Mage moves and captures exactly as a chess Queen while on the middle
+board and may also move and capture to the cell above and below it. 
+
+While on the top or bottom board, the Mage may only move or capture
+one cell forward, backward, right or left. It may also move or capture
+one or two cells straight up or down. It may NOT leap over a piece on the
+middle board while going from top to bottom or vice versa. 
+
+8   -[x]- - - - - - - - - -    
+7  [x[M]x]- - - - - - - - -    
+6   -[x]- - - - - - - - - -    
+5   - - - - - x - - - - - -    
+4   - - - - - - - - - - - -      TOP (1)
+3   - - - - - - - - - - - -    
+2   - - - - - - - - - -{x}-    
+1   - - - - - - - - - - - -    
+        
+8   - - x - - x - - x - - -    
+7   -[x]- x - x - x - - - -    
+6   - - - - x x x - - - - -    
+5   x x x x x M x x x x x x    
+4   - - - - x x x - - - - -      MIDDLE (2)
+3   - - - x - x - x - - - -    
+2   - - x - - x - - x -{x}-    
+1   - x - - - x - - - x - -    
+
+8   - - - - - - - - - - - -    
+7   -[x]- - - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - - - - - x - - - - - -    
+4   - - - - - - - - - - - -      BOTTOM (3)
+3   - - - - - - - - - -{x}-    
+2   - - - - - - - - -{x{M}x}   
+1   - - - - - - - - - -{x}-    
+    
+    a b c d e f g h i j k l
+
+
+King
+
+While on the middle board, the King has the normal move and capture
+of a chess King and may also move and capture to the cell above and below
+it. 
+
+While on the top or bottom board, the ONLY thing the King may do is
+move or capture to the cell directly above it or below it back on the middle
+board. The King is a sitting duck when driven off the middle board. 
+
+There is no castling move. 
+
+8   - - - - - - - - - - - -    
+7   -[K]- - - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - - - - - x - - - - - -    
+4   - - - - - - - - - - - -      TOP (1)
+3   - - - - - - - - - - - -    
+2   - - - - - - - - - - - -    
+1   - - - - - - - - - - - -    
+        
+8   - - - - - - - - - - - -    
+7   -[x]- - - - - - - - - -    
+6   - - - - x x x - - - - -    
+5   - - - - x K x - - - - -    
+4   - - - - x x x - -{x}- -      MIDDLE (2)
+3   - - - - - - - - - - - -    
+2   - - - - - - - - - - - -    
+1   - - - - - - - - - - - -    
+
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - - - - - x - - -{K}- -    
+4   - - - - - - - - - - - -      BOTTOM (3)
+3   - - - - - - - - - - - -    
+2   - - - - - - - - - - - -    
+1   - - - - - - - - - - - -    
+    
+    a b c d e f g h i j k l
+
+
+Paladin
+
+The Paladin may move and capture as a chess King or Knight while on
+the middle board. It moves and captures as a chess King while on the top
+or bottom boards. It may move or capture from board to board by making
+a 3d Knight's move -- two cells in any direction and then one cell in a
+perpendicular direction. It's move is unblockable. 
+
+8   - - - - - - - - - - - -    
+7   -[x x x]- - - - -{x}- -    
+6   -[x[P]x]- - - -{x}-{x}-    
+5   -[x x x]- x - - -{x}- -    
+4   - - - - - - - - - - - -      TOP (1)
+3   - - - x - - - x - - - -    
+2   - - - - - - - - - - - -    
+1   - - - - - x - - - - - -    
+        
+8   - -[x]- - - - - -{x}- -    
+7   - - - - - - - - - - - -    
+6  [x]- - -[x]- -{x}- - -{x}   
+5   - - - - x - x - - - - -    
+4   - -[x]x x x x x -{x}- -      MIDDLE (2)
+3   - - - - x P x - - - - -    
+2   - - - x x x x x - - - -    
+1   - - - - x - x - - - - -    
+
+8   - - - - - - - - - - - -    
+7   - -[x]- - - - -{x x x}-    
+6   -[x]-[x]- - - -{x{P}x}-    
+5   - -[x]- - x - -{x x x}-    
+4   - - - - - - - - - - - -      BOTTOM (3)
+3   - - - x - - - x - - - -    
+2   - - - - - - - - - - - -    
+1   - - - - - x - - - - - -    
+    
+    a b c d e f g h i j k l
+
+
+Warrior
+
+The Warrior has nearly the same move as the chess Pawn. It may move
+but not capture one cell forward. It may a capturing move one cell diagonally
+forward. It does NOT have the option of moving two cells on its first move.
+
+
+On reaching the opponent's baseline, the Warrior promotes to a Hero
+only. 
+
+It is restricted to the middle board. 
+
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - - - - c m c - - - - -    
+4   - - - - - W - - - - - -      MIDDLE (2)
+3   - - - - - - - - - - - -    
+2   - - - - - - - - - - - -    
+1   - - - - - - - - - - - -    
+    a b c d e f g h i j k l
+
+
+Bottom board
+
+Basilisk
+
+The Basilisk may move or capture one cell directly or diagonally forward
+and may also move without capturing one cell straight backwards. 
+
+Though the Basilisk is restricted to the bottom board, it has the power
+to freeze any opposing piece on the cell directly above it on the middle
+board. Freezing is automatic whether an opposing piece moves over the Basilisk
+or the Basilisk moves under the opposing piece. Freezing is temporary --
+once the Basilisk moves away or is captured, the frozen piece regains its
+normal powers. 
+
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - - - - - - - - - - - -    
+4   - - - - - f - - - - - -      MIDDLE (2)
+3   - - - - - - - - - - - -    
+2   - - - - - - - - - - - -    
+1   - - - - - - - - - - - -    
+
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - - - - x x x - - - - -    
+4   - - - - - B - - - - - -      BOTTOM (3)
+3   - - - - - m - - - - - -    
+2   - - - - - - - - - - - -    
+1   - - - - - - - - - - - -    
+    
+    a b c d e f g h i j k l
+
+
+Elemental
+
+While on the lower board, the Elemental may move or capture one or two
+cells orthogonally. (It may NOT leap over occupied cells.) It may also
+move but not capture one cell diagonally. 
+
+It may also make a capturing move to the middle board by moving one
+cell orthogonally and then one cell up. The intermediate cell MUST be empty.
+
+
+The Elemental may not move while on the middle board except to return
+to the bottom by moving or capturing one cell down and then one cell orthogonally.
+The intermediate cell MUST be empty. 
+
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - - x - - - - - - - - -    
+4   - x - x - - - - -[E]- -      MIDDLE (2)
+3   - - x - - - - - - - - -    
+2   - - - - - - - - - - - -    
+1   - - - - - - - - - - - -    
+
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - x - - - - - - - - -    
+5   - m x m - - - - -[x]- -    
+4   x x E x x - - -[x]-[x]-      BOTTOM (3)
+3   - m x m - - - - -[x]- -    
+2   - - x - - - - - - - - -    
+1   - - - - - - - - - - - -    
+    
+    a b c d e f g h i j k l
+
+
+Dwarf
+
+While on the bottom or middle board, the Dwarf may capture one cell
+diagonally forward or move without capturing one cell forward or laterally.
+
+
+It may move up to the middle board by capturing to the cell directly
+above. 
+
+It may move back to the bottom board by making a non-capturing move
+to the cell directly below. 
+
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - - - - - - - - - - - -    
+4   - - - - - - - -[c m c]-      MIDDLE (2)
+3   - - c - - - - -[m[D]m]-    
+2   - - - - - - - - - - - -    
+1   - - - - - - - - - - - -    
+
+8   - - - - - - - - - - - -    
+7   - - - - - - - - - - - -    
+6   - - - - - - - - - - - -    
+5   - - - - - - - - - - - -    
+4   - c m c - - - - - - - -      BOTTOM (3)
+3   - m D m - - - - -[m]- -    
+2   - - - - - - - - - - - -    
+1   - - - - - - - - - - - -    
+    
+    a b c d e f g h i j k l
+
+
