@@ -10,7 +10,7 @@
   var REALM = ['', 'Underworld', 'Land', 'Sky'];
   var KEY = 'dragonchess.v1';
   var $ = function (id) { return document.getElementById(id); };
-  var cfg = { mode: 'ai', side: 1, level: 1, sound: true };
+  var cfg = { mode: 'ai', side: 1, level: 1, simG: 0, simS: 0, sound: true };
   var st, moves = [], texts = [], caps = [], legal = [], stat = null;
   var sel = -1, targets = {}, flipped = false, busy = false, worker = null, useWorker = true, reqId = 0, reqAt = 0;
   var cells = new Array(288), guideByLetter = {};
@@ -24,7 +24,8 @@
     try {
       var o = JSON.parse(localStorage.getItem(KEY));
       if (!o || !o.cfg) return null;
-      if (o.cfg.mode === 'ai' || o.cfg.mode === '2p') cfg.mode = o.cfg.mode;
+      if (o.cfg.mode === 'ai' || o.cfg.mode === '2p' || o.cfg.mode === 'sim') cfg.mode = o.cfg.mode;
+      ['simG', 'simS'].forEach(function (k) { if (o.cfg[k] >= 0 && o.cfg[k] < LEVELS.length) cfg[k] = o.cfg[k] | 0; });
       if (o.cfg.side === 1 || o.cfg.side === -1) cfg.side = o.cfg.side;
       if (o.cfg.level >= 0 && o.cfg.level < LEVELS.length) cfg.level = o.cfg.level | 0;
       cfg.sound = o.cfg.sound !== false;
@@ -49,7 +50,18 @@
       push(list[i]);
     }
   }
-  function humanTurn() { return cfg.mode === '2p' || st.turn === cfg.side; }
+  function humanTurn() { return cfg.mode === '2p' || (cfg.mode === 'ai' && st.turn === cfg.side); }
+  // Level index of the bot playing the given colour, or -1 for a human.
+  function botLevel(side) {
+    if (cfg.mode === 'sim') return side > 0 ? cfg.simG : cfg.simS;
+    return cfg.mode === 'ai' && side !== cfg.side ? cfg.level : -1;
+  }
+  function sideName(side, cap) {
+    var l = botLevel(side), n;
+    if (l >= 0) n = LEVELS[l].name + ' bot';
+    else n = cfg.mode === '2p' ? (side > 0 ? 'Gold player' : 'Scarlet player') : 'Player';
+    return cap ? n : n.charAt(0).toLowerCase() + n.slice(1);
+  }
 
   /* ---------- DOM ---------- */
   function pieceEl(p) {
@@ -106,14 +118,17 @@
     tok.className = st.turn > 0 ? 'gold' : 'scarlet';
     var who = st.turn > 0 ? 'Gold' : 'Scarlet';
     if (stat.over) txt = overTitle();
+    else if (cfg.mode === 'sim') txt = sideName(st.turn, true) + ' (' + who + ') is thinking';
     else if (cfg.mode === 'ai') txt = humanTurn() ? 'Your move (' + who + ')' : 'Computer is thinking';
     else txt = who + ' to move';
     if (!stat.over && stat.check) txt += '. Check!';
     $('statusText').textContent = txt;
     $('spin').hidden = !busy;
-    $('matchup').innerHTML = cfg.mode === 'ai'
-      ? 'You: ' + (cfg.side > 0 ? 'Gold' : 'Scarlet') + '<small>Computer: ' + LEVELS[cfg.level].name + '</small>'
-      : 'Two players<small>Gold moves first</small>';
+    $('matchup').innerHTML = cfg.mode === 'sim'
+      ? 'Simulation<small>Gold: ' + sideName(1, true) + '</small><small>Scarlet: ' + sideName(-1, true) + '</small>'
+      : cfg.mode === 'ai'
+        ? 'You: ' + (cfg.side > 0 ? 'Gold' : 'Scarlet') + '<small>Computer: ' + LEVELS[cfg.level].name + '</small>'
+        : 'Two players<small>Gold moves first</small>';
     var cg = $('capG'), cs = $('capS'), i, list = caps.filter(function (c) { return c !== 0; });
     list.sort(function (a, b) { return DC.VALUE[Math.abs(b)] - DC.VALUE[Math.abs(a)]; });
     cg.innerHTML = ''; cs.innerHTML = '';
@@ -124,7 +139,7 @@
         '<li class="mv' + (i + 1 === texts.length - 1 ? ' cur' : '') + '">' + (texts[i + 1] || '') + '</li>';
     }
     ml.innerHTML = h; ml.scrollTop = ml.scrollHeight;
-    $('bUndo').disabled = moves.length === 0;
+    $('bUndo').disabled = moves.length === 0 || cfg.mode === 'sim';
     $('bSound').className = cfg.sound ? '' : 'off';
   }
   function showInfo(p, sq) {
@@ -191,7 +206,7 @@
     push(m);
     animate(m);
     if (cfg.sound) {
-      if (stat.over) SFX.play(stat.winner === 0 ? 'draw' : (cfg.mode === '2p' || stat.winner === cfg.side ? 'win' : 'lose'));
+      if (stat.over) SFX.play(stat.winner === 0 ? 'draw' : (cfg.mode !== 'ai' || stat.winner === cfg.side ? 'win' : 'lose'));
       else if (stat.check) SFX.play('check');
       else if (o.remote) SFX.play('remote');
       else if (o.promo) SFX.play('promote');
@@ -216,7 +231,7 @@
       return w;
     } catch (e) { useWorker = false; return null; }
   }
-  function aiOpt() { var L = LEVELS[cfg.level]; return { depth: L.depth, time: L.time || 0, noise: L.noise || 0 }; }
+  function aiOpt() { var L = LEVELS[Math.max(0, botLevel(st.turn))]; return { depth: L.depth, time: L.time || 0, noise: L.noise || 0 }; }
   function thinkSync(id) {
     setTimeout(function () {
       if (id !== reqId) return;
@@ -249,9 +264,8 @@
 
   /* ---------- dialogs ---------- */
   function overTitle() {
-    if (stat.winner === 0) return 'Draw';
-    if (cfg.mode === 'ai') return stat.winner === cfg.side ? 'You win' : 'You lose';
-    return (stat.winner > 0 ? 'Gold' : 'Scarlet') + ' wins';
+    if (stat.winner === 0) return 'Draw: ' + sideName(1) + ' vs ' + sideName(-1);
+    return sideName(stat.winner, true) + ' defeated ' + sideName(-stat.winner);
   }
   function showOver() {
     if (!stat.over) return;
@@ -265,7 +279,7 @@
     $('overTitle').textContent = overTitle(); $('overText').textContent = why[stat.result] || '';
     $('dlgOver').hidden = false;
   }
-  var pend = { mode: 'ai', side: 1, level: 1 };
+  var pend = { mode: 'ai', side: 1, level: 1 }; // level may be 'sim'
   function markOpts() {
     var set = function (id, v) {
       var bs = $(id).children;
@@ -273,16 +287,23 @@
     };
     set('optMode', pend.mode); set('optSide', pend.side); set('optLevel', pend.level);
     $('aiOpts').style.display = pend.mode === 'ai' ? '' : 'none';
-    $('levelNote').textContent = LEVELS[pend.level].note;
+    var sim = pend.level === 'sim';
+    $('sideOpts').style.display = sim ? 'none' : '';
+    $('levelNote').textContent = sim ? 'Watch two bots fight. Each bot gets its own randomly chosen difficulty.' : LEVELS[pend.level].note;
   }
   function openNew() {
-    pend = { mode: cfg.mode, side: cfg.side, level: cfg.level };
+    pend = { mode: cfg.mode === '2p' ? '2p' : 'ai', side: cfg.side, level: cfg.mode === 'sim' ? 'sim' : cfg.level };
     markOpts(); $('dlgOver').hidden = true; $('dlgNew').hidden = false;
   }
   function startNew() {
     cancelAI();
-    cfg.mode = pend.mode; cfg.level = pend.level;
-    cfg.side = pend.side === 0 ? (Math.random() < 0.5 ? 1 : -1) : pend.side;
+    if (pend.mode === 'ai' && pend.level === 'sim') {
+      cfg.mode = 'sim';
+      cfg.simG = (Math.random() * LEVELS.length) | 0; cfg.simS = (Math.random() * LEVELS.length) | 0;
+    } else {
+      cfg.mode = pend.mode; if (pend.level !== 'sim') cfg.level = pend.level;
+      cfg.side = pend.side === 0 ? (Math.random() < 0.5 ? 1 : -1) : pend.side;
+    }
     flipped = cfg.mode === 'ai' && cfg.side < 0;
     replay([]); deselect();
     $('dlgNew').hidden = true;
@@ -291,7 +312,7 @@
     if (!humanTurn()) askAI();
   }
   function undo() {
-    if (!moves.length) return;
+    if (!moves.length || cfg.mode === 'sim') return;
     cancelAI();
     var list = moves.slice(0, -1);
     if (cfg.mode === 'ai' && list.length % 2 !== (cfg.side > 0 ? 0 : 1) && list.length) list.pop();
@@ -307,6 +328,7 @@
       '<li>Tap a piece to see its moves on all three boards. Green dot: move. Green ring: capture. Orange ring: Dragon fire (capture from above without moving).</li>' +
       '<li>White outlines mark the squares directly above and below the selected piece.</li>' +
       '<li>A Basilisk freezes the enemy piece standing directly above it on the Land board.</li>' +
+      '<li>Simulation (in the difficulty menu) lets you watch two bots of random difficulty play each other.</li>' +
       '<li>Draws: stalemate, the same position three times, or 100 moves each with no capture or Warrior move.</li>' +
       '<li>Notation: piece letter, level, file, rank. Example: W2e2-2e3. A star marks Dragon fire.</li></ul>';
     GUIDE.forEach(function (g) {
@@ -333,6 +355,8 @@
       var b = document.createElement('button'); b.type = 'button'; b.setAttribute('data-v', i); b.textContent = L.name;
       $('optLevel').appendChild(b);
     });
+    var sb = document.createElement('button'); sb.type = 'button'; sb.setAttribute('data-v', 'sim'); sb.textContent = 'Simulation';
+    $('optLevel').appendChild(sb);
     layout(); buildBoards(); buildGuide(); refreshMarks(); refreshPanel();
     $('boards').addEventListener('click', function (e) {
       var c = e.target.closest ? e.target.closest('.cell') : null;
@@ -342,7 +366,7 @@
       $(id).addEventListener('click', function (e) {
         var v = e.target.getAttribute && e.target.getAttribute('data-v');
         if (v === null || v === undefined) return;
-        if (id === 'optMode') pend.mode = v; else if (id === 'optSide') pend.side = +v; else pend.level = +v;
+        if (id === 'optMode') pend.mode = v; else if (id === 'optSide') pend.side = +v; else pend.level = v === 'sim' ? 'sim' : +v;
         markOpts();
       });
     });

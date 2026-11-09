@@ -27,6 +27,8 @@ Goal: a single self-contained `index.html` Dragonchess game (PC and mobile, offl
 - [x] Browser checks in Chromium from `file://`, desktop 1440x900 and iPhone 13 emulation: 120-ply game against the AI, 400-ply two-player game, undo, flip, guide, reload restore. No page errors.
 
 - [x] GitHub Pages live at https://xenodorian.github.io/DragonChess/ (deployed by the workflow; served file verified byte-identical to `index.html`).
+- [x] Simulation mode: a "Simulation" button in the difficulty menu starts a bot-vs-bot game where each bot gets an independently random level (`cfg.simG`, `cfg.simS` in `src/ui.js`). Undo is disabled while watching.
+- [x] Victory screen names both sides with bot difficulty, e.g. "Hard bot defeated novice bot", "Player defeated easy bot" (`overTitle` and `sideName` in `src/ui.js`). Verified in the browser for a full simulated game; the player-vs-bot wording uses the same code path but was not played to a finish.
 
 ## To do / not done
 
