@@ -1,11 +1,11 @@
 /* Dragonchess rules engine and AI. See RULES.md. Runs in browser, Web Worker and Node. */
 var DC = (function () {
   'use strict';
-  var S = 1, G = 2, R = 3, W = 4, O = 5, U = 6, H = 7, T = 8, C = 9, M = 10, K = 11, P = 12, D = 13, B = 14, E = 15;
-  var LETTERS = ' SGRWOUHTCMKPDBE';
-  var NAMES = ['', 'Sylph', 'Griffon', 'Dragon', 'Warrior', 'Oliphant', 'Unicorn', 'Hero', 'Thief', 'Cleric', 'Mage', 'King', 'Paladin', 'Dwarf', 'Basilisk', 'Elemental'];
+  var S = 1, G = 2, R = 3, W = 4, O = 5, U = 6, H = 7, T = 8, C = 9, M = 10, K = 11, P = 12, D = 13, B = 14, E = 15, Y = 16;
+  var LETTERS = ' SGRWOUHTCMKPDBEY';
+  var NAMES = ['', 'Sylph', 'Griffon', 'Dragon', 'Warrior', 'Oliphant', 'Unicorn', 'Hero', 'Thief', 'Cleric', 'Mage', 'King', 'Paladin', 'Dwarf', 'Basilisk', 'Elemental', 'Wyvern'];
   // Gygax values x100 (King has no value).
-  var VALUE = [0, 100, 500, 800, 100, 500, 250, 450, 400, 900, 1100, 0, 1000, 200, 300, 400];
+  var VALUE = [0, 100, 500, 800, 100, 500, 250, 450, 400, 900, 1100, 0, 1000, 200, 300, 400, 500]; // Wyvern 500 is a design estimate, not a Gygax value
   var F_REMOTE = 1 << 18, F_PROMO = 2 << 18, F_CAP = 4 << 18;
   var INF = 2000000, KC = 1000000, MATE = 30000;
 
@@ -17,30 +17,30 @@ var DC = (function () {
 
   /* ---------- Variants ----------
      Internal grid is always 12 files x 3 levels. VALID marks squares that exist in the variant.
-     Wyvern Chess: no Underworld (level 1), files a and l removed, no Sylph or Mage. */
+     Wyvern Chess: no Underworld (level 1), 9 files a to i (internal 0 to 8), no Sylph or Mage. */
   var VARIANT = 'dragonchess';
   var VALID = new Uint8Array(288);
   var FILE0 = 0; // internal file index of letter 'a'
   function setVariant(id) {
     var i, l, f, wy = id === 'wyvern';
     VARIANT = wy ? 'wyvern' : 'dragonchess';
-    FILE0 = wy ? 1 : 0;
+    FILE0 = 0;
     for (i = 0; i < 288; i++) {
       l = (i / 96) | 0; f = i % 12;
-      VALID[i] = wy ? (l > 0 && f > 0 && f < 11 ? 1 : 0) : 1;
+      VALID[i] = wy ? (l > 0 && f < 9 ? 1 : 0) : 1;
     }
   }
   function fileLetter(f) { return 'abcdefghijkl'.charAt(f - FILE0); }
-  function fileList() { return VARIANT === 'wyvern' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; }
+  function fileList() { return VARIANT === 'wyvern' ? [0, 1, 2, 3, 4, 5, 6, 7, 8] : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; }
   function levelNums() { return VARIANT === 'wyvern' ? [3, 2] : [3, 2, 1]; } // 1-based, top board first
   setVariant('dragonchess');
 
   /* ---------- Zobrist + piece-square tables ---------- */
-  var ZL = new Int32Array(31 * 288), ZH = new Int32Array(31 * 288), PST = new Int16Array(31 * 288);
+  var ZL = new Int32Array(33 * 288), ZH = new Int32Array(33 * 288), PST = new Int16Array(33 * 288);
   var seed = 0x9E3779B9;
   function rnd() { seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5; return seed | 0; }
   var i0;
-  for (i0 = 0; i0 < 31 * 288; i0++) { ZL[i0] = rnd(); ZH[i0] = rnd(); }
+  for (i0 = 0; i0 < 33 * 288; i0++) { ZL[i0] = rnd(); ZH[i0] = rnd(); }
   var ZTL = rnd(), ZTH = rnd();
 
   function bonus(t, l, adv, f) {
@@ -62,10 +62,10 @@ var DC = (function () {
     return 0;
   }
   (function () {
-    for (var t = 1; t <= 15; t++) for (var sq = 0; sq < 288; sq++) {
+    for (var t = 1; t <= 16; t++) for (var sq = 0; sq < 288; sq++) {
       var l = (sq / 96) | 0, r = ((sq % 96) / 12) | 0, f = sq % 12;
-      PST[(t + 15) * 288 + sq] = VALUE[t] + bonus(t, l, r, f);
-      PST[(-t + 15) * 288 + sq] = -(VALUE[t] + bonus(t, l, 7 - r, f));
+      PST[(t + 16) * 288 + sq] = VALUE[t] + bonus(t, l, r, f);
+      PST[(-t + 16) * 288 + sq] = -(VALUE[t] + bonus(t, l, 7 - r, f));
     }
   })();
 
@@ -75,13 +75,24 @@ var DC = (function () {
   }
   function refresh(st) {
     var lo = 0, hi = 0, sc = 0, b = st.board;
-    for (var i = 0; i < 288; i++) if (b[i] !== 0) { var k = (b[i] + 15) * 288 + i; lo ^= ZL[k]; hi ^= ZH[k]; sc += PST[k]; }
+    for (var i = 0; i < 288; i++) if (b[i] !== 0) { var k = (b[i] + 16) * 288 + i; lo ^= ZL[k]; hi ^= ZH[k]; sc += PST[k]; }
     if (st.turn < 0) { lo ^= ZTL; hi ^= ZTH; }
     st.lo = lo; st.hi = hi; st.score = sc;
     return st;
   }
   function newGame() {
     var st = emptyState(), b = st.board, f;
+    if (VARIANT === 'wyvern') {
+      var wb = [U, H, T, C, K, P, T, H, U];
+      for (f = 0; f < 9; f++) {
+        b[idx(2, f, 0)] = wb[f]; b[idx(2, f, 7)] = -wb[f];
+        b[idx(2, f, 1)] = W; b[idx(2, f, 6)] = -W;
+        b[idx(3, f, 1)] = Y; b[idx(3, f, 6)] = -Y;
+      }
+      b[idx(3, 1, 0)] = G; b[idx(3, 8, 0)] = G; b[idx(3, 4, 0)] = R;
+      b[idx(3, 1, 7)] = -G; b[idx(3, 8, 7)] = -G; b[idx(3, 4, 7)] = -R;
+      return refresh(st);
+    }
     var back = [O, U, H, T, C, M, K, P, T, H, U, O];
     for (f = 0; f < 12; f++) {
       b[idx(2, f, 0)] = back[f]; b[idx(2, f, 7)] = -back[f];
@@ -93,13 +104,6 @@ var DC = (function () {
     b[idx(3, 2, 7)] = -G; b[idx(3, 10, 7)] = -G; b[idx(3, 6, 7)] = -R;
     b[idx(1, 2, 0)] = B; b[idx(1, 10, 0)] = B; b[idx(1, 6, 0)] = E;
     b[idx(1, 2, 7)] = -B; b[idx(1, 10, 7)] = -B; b[idx(1, 6, 7)] = -E;
-    if (VARIANT === 'wyvern') {
-      // Wyvern: keep the Dragonchess setup on the squares that remain, minus Sylph and Mage.
-      for (var q = 0; q < 288; q++) {
-        var a = b[q] < 0 ? -b[q] : b[q];
-        if (!VALID[q] || a === S || a === M) b[q] = 0;
-      }
-    }
     return refresh(st);
   }
   function save(st) {
@@ -229,6 +233,14 @@ var DC = (function () {
         case B:
           add(f, r + fw, l, 0); add(f - 1, r + fw, l, 0); add(f + 1, r + fw, l, 0); add(f, r - fw, l, 1);
           break;
+        case Y:
+          if (l === 2) {
+            add(f + 2, r, 2, 0); add(f - 2, r, 2, 0); add(f, r + 2, 2, 0); add(f, r - 2, 2, 0);
+            add(f + 2, r + 2, 2, 0); add(f + 2, r - 2, 2, 0); add(f - 2, r + 2, 2, 0); add(f - 2, r - 2, 2, 0);
+            remote(f + 2, r); remote(f - 2, r); remote(f, r + 2); remote(f, r - 2);
+            remote(f + 2, r + 2); remote(f + 2, r - 2); remote(f - 2, r + 2); remote(f - 2, r - 2);
+          }
+          break;
         case E:
           if (l === 0) {
             for (k = 0; k < 4; k++) {
@@ -251,12 +263,12 @@ var DC = (function () {
     var b = st.board, from = m & 511, to = (m >> 9) & 511, cap = b[to];
     st.ucap.push(cap); st.uhalf.push(st.half); st.uscore.push(st.score); st.hl.push(st.lo); st.hh.push(st.hi);
     var lo = st.lo, hi = st.hi, sc = st.score, k;
-    if (cap !== 0) { k = (cap + 15) * 288 + to; lo ^= ZL[k]; hi ^= ZH[k]; sc -= PST[k]; }
+    if (cap !== 0) { k = (cap + 16) * 288 + to; lo ^= ZL[k]; hi ^= ZH[k]; sc -= PST[k]; }
     if (m & F_REMOTE) { b[to] = 0; st.half = 0; }
     else {
-      var p = b[from]; k = (p + 15) * 288 + from; lo ^= ZL[k]; hi ^= ZH[k]; sc -= PST[k]; b[from] = 0;
+      var p = b[from]; k = (p + 16) * 288 + from; lo ^= ZL[k]; hi ^= ZH[k]; sc -= PST[k]; b[from] = 0;
       var np = (m & F_PROMO) ? (p > 0 ? H : -H) : p;
-      k = (np + 15) * 288 + to; lo ^= ZL[k]; hi ^= ZH[k]; sc += PST[k]; b[to] = np;
+      k = (np + 16) * 288 + to; lo ^= ZL[k]; hi ^= ZH[k]; sc += PST[k]; b[to] = np;
       st.half = (cap !== 0 || p === W || p === -W) ? 0 : st.half + 1;
     }
     st.lo = lo ^ ZTL; st.hi = hi ^ ZTH; st.score = sc; st.turn = -st.turn;
@@ -462,7 +474,7 @@ var DC = (function () {
   }
 
   return {
-    S: S, G: G, R: R, W: W, O: O, U: U, H: H, T: T, C: C, M: M, K: K, P: P, D: D, B: B, E: E,
+    S: S, G: G, R: R, W: W, O: O, U: U, H: H, T: T, C: C, M: M, K: K, P: P, D: D, B: B, E: E, Y: Y,
     LETTERS: LETTERS, NAMES: NAMES, VALUE: VALUE, MATE: MATE,
     idx: idx, sqLevel: sqLevel, sqRank: sqRank, sqFile: sqFile, sqName: sqName,
     emptyState: emptyState, refresh: refresh, newGame: newGame, save: save, load: load,

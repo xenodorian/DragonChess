@@ -75,19 +75,29 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 ## Differences from Dragonchess
 
 - **Boards:** two boards, Sky (level 3) and Land (level 2). No Underworld (level 1).
-- **Size:** each board is 10 files by 8 ranks, files a to j. The outer files of Dragonchess (a and l) are removed.
-- **Removed pieces:** Sylph, Mage, Dwarf, Basilisk, Elemental. Their rules are not used.
-- **Remaining pieces:** Griffon, Dragon, Warrior, Oliphant, Unicorn, Hero, Thief, Cleric, King, Paladin. Their moves are the Dragonchess rules with every move to or from level 1 removed.
+- **Size:** each board is 9 files by 8 ranks, files a to i. Files a and l of Dragonchess are removed, and the empty file e (next to the King) is removed too.
+- **Removed pieces:** Sylph, Mage, Dwarf, Basilisk, Elemental.
+- **Added piece:** Wyvern (letter Y), see below.
+- **Remaining pieces:** Griffon, Dragon, Warrior, Oliphant, Unicorn, Hero, Thief, Cleric, King, Paladin, Wyvern.
 - **Win, draws, promotion, Dragon remote capture:** unchanged from Dragonchess.
+
+## Wyvern (letter Y)
+
+- **Sky only.** Moves exactly two squares in any of the eight straight or diagonal directions. It jumps over pieces, as the Griffon does. It captures an enemy on Sky the same way.
+- **Capture from afar:** instead of moving, it may capture one enemy piece on Land that is two squares away in any of the eight directions from the square directly below it. The Wyvern stays where it is, as with the Dragon. The remote capture is a full move.
+- **Ruling (not in any source):** the leap is not blocked, and a Wyvern may not capture an adjacent Land piece from afar.
+- **Value:** 500 (5.0 on the Gygax scale). This is a design estimate. Gygax did not value this piece.
 
 ## Start position (Gold; Scarlet mirrors on ranks 8 and 7)
 
-- Sky, rank 1: Griffon b1, Dragon f1, Griffon j1.
-- Land, rank 1: Unicorn a1, Hero b1, Thief c1, Cleric d1, empty e1, King f1, Paladin g1, Thief h1, Hero i1, Unicorn j1.
-- Land, rank 2: Warriors a2 to j2.
+- Sky, rank 1: Griffon b1, Dragon e1, Griffon i1.
+- Sky, rank 2: Wyverns a2 to i2 (the whole rank).
+- Land, rank 1: Unicorn a1, Hero b1, Thief c1, Cleric d1, King e1, Paladin f1, Thief g1, Hero h1, Unicorn i1.
+- Land, rank 2: Warriors a2 to i2.
+
+Gold has 30 pieces, Scarlet has 30.
 
 Notes on this setup:
 
-- The Griffons already start on Sky in Dragonchess (RULES.md, Dragonchess setup, level 3). They are kept on Sky here.
-- The Mage stood on e1 in Dragonchess. Its square is left empty, since no piece replaces it.
-- The outer Land pieces (Oliphant a1 and l1) are removed with the outer files.
+- The Griffons already start on Sky in Dragonchess (level 3). They are kept on Sky here.
+- The Mage's empty square (e1) was removed with the file.

@@ -34,4 +34,4 @@ This is an unofficial fan implementation. It is not affiliated with the Gygax es
 
 ## Wyvern Chess
 
-`wyvern.html` is a variant of Dragonchess: two boards (Sky and Land), 10 files wide, with no Underworld and no Sylph or Mage. Play it at https://xenodorian.github.io/DragonChess/wyvern.html. Rules are in `RULES.md`.
+`wyvern.html` is a variant of Dragonchess: two boards (Sky and Land), 9 files wide, with no Underworld, no Sylph or Mage, and a Wyvern rank on Sky. Play it at https://xenodorian.github.io/DragonChess/wyvern.html. Rules are in `RULES.md`.

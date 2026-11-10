@@ -31,7 +31,7 @@ Goal: a single self-contained `index.html` Dragonchess game (PC and mobile, offl
 - [x] GitHub Pages live at https://xenodorian.github.io/DragonChess/ (deployed by the workflow; served file verified byte-identical to `index.html`).
 - [x] Simulation mode: a "Simulation" button in the difficulty menu starts a bot-vs-bot game where each bot gets an independently random level (`cfg.simG`, `cfg.simS` in `src/ui.js`). Undo is disabled while watching.
 - [x] Victory screen names both sides with bot difficulty, e.g. "Hard bot defeated novice bot", "Player defeated easy bot" (`overTitle` and `sideName` in `src/ui.js`). Verified in the browser for a full simulated game; the player-vs-bot wording uses the same code path but was not played to a finish.
-- [x] Wyvern Chess (`wyvern.html`): two boards of 10 by 8, no Underworld, no Sylph, Mage, Dwarf, Basilisk or Elemental. Engine uses a validity mask (`VALID`) and `setVariant`. 22 pieces per side. Tests cover start position, piece removal and 120 random games. Browser-checked: layout, 10 columns, a full simulated game.
+- [x] Wyvern Chess (`wyvern.html`): two boards of 9 by 8, no Underworld, no Sylph, Mage, Dwarf, Basilisk or Elemental. Second rank of Sky is Wyverns (letter Y, two-square leaps on Sky, remote capture two squares away on Land). Engine uses a validity mask (`VALID`) and `setVariant`. 22 pieces per side. Tests cover start position, piece removal and 120 random games. Browser-checked: layout, 10 columns, a full simulated game.
 
 ## To do / not done
 
@@ -47,6 +47,6 @@ Goal: a single self-contained `index.html` Dragonchess game (PC and mobile, offl
 - On phones the three boards do not all fit on screen at a tappable size. Below 26 px per square the layout switches to width-fit squares and the page scrolls vertically.
 - A 3D king can step to another level, so "obvious" 2D mates are often not mate. One hand-written test position was wrong for this reason and was corrected.
 - GitHub Pages was not enabled on the repo and no API tool for enabling it was available. The workflow's `actions/configure-pages` step with `enablement: true` enabled it on the first run.
-- Wyvern Chess: Griffons already start on Sky in Dragonchess, so the requested Sky start is the existing setup. The Mage's square (e1) is left empty. Both are noted in `RULES.md`.
+- Wyvern Chess: Griffons already start on Sky in Dragonchess, so the requested Sky start is the existing setup. The Wyvern's value (500) is a design estimate. Both are noted in `RULES.md`.
 - Expert always uses its full 8 seconds. Hard usually answers in well under 3 seconds.
 - Work split: three Haiku subagents wrote `src/sfx.js`, `src/guide.json` + `README.md`, and `test/parse-diagrams.js` + `test/fixtures.json`. Their output was validated (JSON parse, syntax check, fixtures cross-checked against the engine).

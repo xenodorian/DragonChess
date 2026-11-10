@@ -83,7 +83,7 @@
       for (var row = 0; row < 8; row++) for (var col = 0; col < nf; col++) {
         var r = flipped ? row : 7 - row, f = flipped ? files[nf - 1 - col] : files[col], sq = DC.idx(L, f, r);
         var c = document.createElement('div');
-        c.className = 'cell ' + ((f - base + r) % 2 === 1 ? 'l' : 'd');
+        c.className = 'cell ' + ((nf - 1 - (f - base) + r) % 2 === 0 ? 'l' : 'd');
         c.setAttribute('data-sq', sq);
         if (col === 0) c.innerHTML += '<span class="coord r">' + (r + 1) + '</span>';
         if (row === 7) c.innerHTML += '<span class="coord f">' + DC.fileLetter(f) + '</span>';
@@ -330,11 +330,11 @@
   }
   function buildGuide() {
     var h = '<ul>' + (WY ?
-      '<li>Two stacked 10 by 8 boards: Sky (level 3) and Land (level 2). There is no Underworld.</li>' +
+      '<li>Two stacked 9 by 8 boards: Sky (level 3) and Land (level 2). There is no Underworld.</li>' +
       '<li>Gold moves first. Checkmate the enemy King to win. There is no castling.</li>' +
       '<li>Tap a piece to see its moves on both boards. Green dot: move. Green ring: capture. Orange ring: Dragon fire (capture from above without moving).</li>' +
       '<li>White outlines mark the squares directly above and below the selected piece.</li>' +
-      '<li>Wyvern Chess has no Sylph, Mage, Dwarf, Basilisk or Elemental.</li>' +
+      '<li>Wyvern Chess has no Sylph, Mage, Dwarf, Basilisk or Elemental. The second rank of Sky is filled with Wyverns.</li>' +
       '<li>Draws: stalemate, the same position three times, or 100 moves each with no capture or Warrior move.</li>' +
       '<li>Notation: piece letter, level, file, rank. Example: W2e2-2e3. A star marks Dragon fire.</li></ul>' :
       '<li>Three stacked 12 by 8 boards: Sky (level 3), Land (level 2) and Underworld (level 1).</li>' +

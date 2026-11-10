@@ -95,20 +95,31 @@ r = DC.think(s, { depth: 3 }); ok(r.score >= DC.MATE - 10 , 'AI finds mate in on
 s = st0([[sq('2a1'), DC.K], [sq('2h8'), -DC.K], [sq('2d4'), DC.O], [sq('2d7'), -DC.M], [sq('2l2'), -DC.W]]);
 r = DC.think(s, { depth: 2 }); ok(DC.moveText(s, r.move).indexOf('2d7') > 0, 'AI takes hanging mage, got ' + DC.moveText(s, r.move));
 
-// 6. Wyvern Chess.
+// 6. Wyvern Chess (9 files a to i, Sky and Land only).
 DC.setVariant('wyvern');
-const wsq = n => DC.idx(+n[0], 'abcdefghij'.indexOf(n[1]) + 1, +n[2] - 1);
+const wsq = n => DC.idx(+n[0], 'abcdefghi'.indexOf(n[1]), +n[2] - 1);
 const wg = DC.newGame();
 let wGold = 0, wScar = 0, wBad = 0;
 for (let i = 0; i < 288; i++) { const v = wg.board[i]; if (v > 0) wGold++; if (v < 0) wScar++; if (v && !DC.VALID[i]) wBad++; }
-ok(wGold === 22 && wScar === 22, 'wyvern 22 pieces per side: ' + wGold + '/' + wScar);
+ok(wGold === 30 && wScar === 30, 'wyvern 30 pieces per side: ' + wGold + '/' + wScar);
 ok(wBad === 0, 'wyvern no pieces on removed squares');
-const wantW = { '3b1': 'G', '3j1': 'G', '3f1': 'R', '2a1': 'U', '2b1': 'H', '2c1': 'T', '2d1': 'C', '2f1': 'K', '2g1': 'P', '2h1': 'T', '2i1': 'H', '2j1': 'U', '2a2': 'W', '2j2': 'W' };
-for (const n in wantW) ok(wg.board[wsq(n)] === DC.LETTERS.indexOf(wantW[n]), 'wyvern start ' + n);
-ok(wg.board[wsq('2e1')] === 0, 'wyvern e1 empty (Mage removed)');
-ok(DC.fileLetter(wsq('2a1') % 12) === 'a', 'wyvern file letters start at a');
+const wantW = { '3b1': 'G', '3i1': 'G', '3e1': 'R', '2a1': 'U', '2b1': 'H', '2c1': 'T', '2d1': 'C', '2e1': 'K', '2f1': 'P', '2g1': 'T', '2h1': 'H', '2i1': 'U', '2a2': 'W', '2i2': 'W', '3a2': 'Y', '3i2': 'Y' };
+for (const n in wantW) ok(wg.board[wsq(n)] === DC.LETTERS.indexOf(wantW[n]), 'wyvern start ' + n + ' ' + wg.board[wsq(n)]);
+ok(wg.board[wsq('3a7')] === -DC.Y && wg.board[wsq('3i7')] === -DC.Y, 'scarlet wyverns on rank 7');
+ok(DC.fileLetter(0) === 'a' && DC.fileList().length === 9, 'wyvern 9 files a to i');
 ok(!DC.VALID[DC.idx(1, 2, 0)], 'wyvern underworld invalid');
-// Moves never leave the board, across random self-play.
+// Wyvern movement: two squares on Sky, jumping allowed; capture two squares away on Land from afar, no move.
+const wy = (sqs) => { const s = DC.emptyState(); for (const [q, p] of sqs) s.board[q] = p; s.turn = 1; return DC.refresh(s); };
+let t1 = wy([[wsq('3e4'), DC.Y], [wsq('3e4') + 1, -DC.W], [wsq('2a8'), -DC.K], [wsq('2a1'), DC.K]]);
+const yt = DC.pseudoMoves(t1).filter(m => m.from === wsq('3e4')).map(m => DC.sqName(m.to) + (m.remote ? 'r' : ''));
+ok(['3c4', '3g4', '3e2', '3e6', '3c2', '3g6', '3c6', '3g2'].every(q => yt.indexOf(q) >= 0), 'wyvern sky leaps: ' + yt.join(' '));
+ok(yt.every(q => q[0] === '3' || q.endsWith('r')), 'wyvern never steps to Land by move');
+ok(yt.indexOf('2e4r') < 0, 'wyvern remote targets are two squares away, not adjacent');
+let t2 = wy([[wsq('3e4'), DC.Y], [wsq('2e6'), -DC.W], [wsq('2a1'), DC.K], [wsq('2a8'), -DC.K]]);
+ok(DC.pseudoMoves(t2).some(m => m.from === wsq('3e4') && m.remote && m.to === wsq('2e6')), 'wyvern captures Land piece two squares away from afar');
+let t3 = wy([[wsq('3e4'), DC.Y], [wsq('2e5'), -DC.W], [wsq('2a1'), DC.K], [wsq('2a8'), -DC.K]]);
+ok(!DC.pseudoMoves(t3).some(m => m.from === wsq('3e4') && m.to === wsq('2e5')), 'wyvern cannot capture adjacent Land piece from afar');
+// Wyvern start: gold has legal moves, and random games stay on the board.
 let wPlies = 0, wEnds = {}, wOff = 0;
 for (let game = 0; game < 120; game++) {
   const st = DC.newGame();
@@ -118,7 +129,7 @@ for (let game = 0; game < 120; game++) {
     for (const m of legal) if (!DC.VALID[(m >> 9) & 511]) wOff++;
     DC.make(st, legal[(Math.random() * legal.length) | 0]); wPlies++;
     for (let i = 0; i < 288; i++) if (st.board[i] && !DC.VALID[i]) { wOff++; break; }
-    if (st.board.some((v, i) => (v === DC.S || v === -DC.S || v === DC.M || v === -DC.M || v === DC.B || v === -DC.B || v === DC.E || v === -DC.E || v === DC.D || v === -DC.D))) { wOff++; break; }
+    if (st.board.some(v => { const a = Math.abs(v); return a === DC.S || a === DC.M || a === DC.B || a === DC.E || a === DC.D; })) { wOff++; break; }
   }
 }
 ok(wOff === 0, 'wyvern moves stay on board and removed pieces never appear: ' + wOff);
