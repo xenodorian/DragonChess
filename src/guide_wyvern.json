@@ -76,7 +76,7 @@
 "lines": [
 "On Land only, moves one square straight forward without capturing.",
 "Captures one square diagonally forward.",
-"Promotes to a Paladin when it reaches the far rank."
+"Promotes to an Oliphant when it reaches the far rank."
 ]
 },
 {
@@ -88,17 +88,6 @@
 "On Sky only, moves one or two squares in any straight or diagonal direction. It jumps over pieces.",
 "Instead of moving, may capture an enemy piece on Land directly below it. The Wyvern does not move when it does this.",
 "Its value is a design estimate, not from Gygax."
-]
-},
-{
-"letter": "P",
-"name": "Paladin",
-"value": 10,
-"home": "Land",
-"lines": [
-"On Land, moves or captures like a king or a knight.",
-"On Sky, moves or captures like a king.",
-"Between Land and Sky, makes an unblockable 3D knight leap: one level plus two squares orthogonally."
 ]
 }
 ]

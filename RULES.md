@@ -75,11 +75,12 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 ## Differences from Dragonchess
 
 - **Boards:** two boards, Sky (level 3) and Land (level 2). No Underworld (level 1).
-- **Size:** each board is 9 files by 8 ranks, files a to i. Files a and l of Dragonchess are removed, and the empty file e (next to the King) is removed too.
-- **Removed pieces:** Sylph, Mage, Dwarf, Basilisk, Elemental.
+- **Size:** each board is 7 files by 8 ranks, files a to g. Dragonchess files a and l were removed, then the files of the Paladins (b and h) were removed. The remaining files are renamed a to g from left to right.
+- **Removed pieces:** Sylph, Mage, Dwarf, Basilisk, Elemental, Paladin, Hero.
 - **Added piece:** Wyvern (letter Y), see below.
-- **Remaining pieces:** Griffon, Dragon, Warrior, Oliphant, Unicorn, Paladin, Thief, Cleric, King, Wyvern. The Oliphant replaces the Paladin on f1 and f8, and the Paladin replaces the Hero on b1 and h1. Warriors promote to Paladins, not Heroes.
-- **Win, draws, promotion, Dragon remote capture:** unchanged from Dragonchess.
+- **Remaining pieces:** Griffon, Dragon, Warrior, Oliphant, Unicorn, Thief, Cleric, King, Wyvern.
+- **Win, draws, Dragon remote capture:** unchanged from Dragonchess.
+- **Promotion (ruling, not in any source):** a Warrior that reaches the far rank becomes an Oliphant. Dragonchess promotes Warriors to Heroes, but Heroes are not in Wyvern Chess.
 
 ## Wyvern (letter Y)
 
@@ -90,14 +91,14 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 
 ## Start position (Gold; Scarlet mirrors on ranks 8 and 7)
 
-- Sky, rank 1: Griffon a1, Dragon e1, Griffon i1 (Griffons on the two ends of the board).
-- Sky, rank 2: Wyverns a2 to i2 (the whole rank).
-- Land, rank 1: Unicorn a1, Paladin b1, Thief c1, Cleric d1, King e1, Oliphant f1, Thief g1, Paladin h1, Unicorn i1.
-- Land, rank 2: Warriors a2 to i2.
+- Sky, rank 1: Griffon a1, Dragon d1, Griffon g1.
+- Sky, rank 2: Wyverns a2 to g2 (the whole rank).
+- Land, rank 1: Unicorn a1, Thief b1, Cleric c1, King d1, Oliphant e1, Thief f1, Unicorn g1.
+- Land, rank 2: Warriors a2 to g2.
 
-Gold has 30 pieces, Scarlet has 30.
+Each side has 24 pieces: 10 on Sky and 14 on Land.
 
 Notes on this setup:
 
 - The Griffons already start on Sky in Dragonchess (level 3). In Wyvern Chess they sit on the two ends of Sky's first rank.
-- The Mage's empty square (e1) was removed with the file.
+- The King sits on the centre file (d) of the 7-file board.

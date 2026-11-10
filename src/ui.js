@@ -205,7 +205,7 @@
     el.style.transform = '';
     setTimeout(function () {
       el.classList.remove('moving');
-      if (o.promo) el.querySelector('use').setAttribute('href', WY ? '#pc-P' : '#pc-H');
+      if (o.promo) el.querySelector('use').setAttribute('href', WY ? '#pc-O' : '#pc-H');
     }, 320);
   }
   function doMove(m) {
@@ -330,7 +330,7 @@
   }
   function buildGuide() {
     var h = '<ul>' + (WY ?
-      '<li>Two stacked 9 by 8 boards: Sky (level 3) and Land (level 2). There is no Underworld.</li>' +
+      '<li>Two stacked 7 by 8 boards: Sky (level 3) and Land (level 2). There is no Underworld.</li>' +
       '<li>Gold moves first. Checkmate the enemy King to win. There is no castling.</li>' +
       '<li>Tap a piece to see its moves on both boards. Green dot: move. Green ring: capture. Orange ring: Dragon fire (capture from above without moving).</li>' +
       '<li>White outlines mark the squares directly above and below the selected piece.</li>' +

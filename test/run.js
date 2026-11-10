@@ -97,17 +97,17 @@ r = DC.think(s, { depth: 2 }); ok(DC.moveText(s, r.move).indexOf('2d7') > 0, 'AI
 
 // 6. Wyvern Chess (9 files a to i, Sky and Land only).
 DC.setVariant('wyvern');
-const wsq = n => DC.idx(+n[0], 'abcdefghi'.indexOf(n[1]), +n[2] - 1);
+const wsq = n => DC.idx(+n[0], 'abcdefg'.indexOf(n[1]), +n[2] - 1);
 const wg = DC.newGame();
 let wGold = 0, wScar = 0, wBad = 0;
 for (let i = 0; i < 288; i++) { const v = wg.board[i]; if (v > 0) wGold++; if (v < 0) wScar++; if (v && !DC.VALID[i]) wBad++; }
-ok(wGold === 30 && wScar === 30, 'wyvern 30 pieces per side: ' + wGold + '/' + wScar);
+ok(wGold === 24 && wScar === 24, 'wyvern 24 pieces per side: ' + wGold + '/' + wScar);
 ok(wBad === 0, 'wyvern no pieces on removed squares');
-const wantW = { '3a1': 'G', '3i1': 'G', '3e1': 'R', '2a1': 'U', '2b1': 'P', '2c1': 'T', '2d1': 'C', '2e1': 'K', '2f1': 'O', '2g1': 'T', '2h1': 'P', '2i1': 'U', '2a2': 'W', '2i2': 'W', '3a2': 'Y', '3i2': 'Y' };
+const wantW = { '3a1': 'G', '3g1': 'G', '3d1': 'R', '2a1': 'U', '2b1': 'T', '2c1': 'C', '2d1': 'K', '2e1': 'O', '2f1': 'T', '2g1': 'U', '2a2': 'W', '2g2': 'W', '3a2': 'Y', '3g2': 'Y' };
 for (const n in wantW) ok(wg.board[wsq(n)] === DC.LETTERS.indexOf(wantW[n]), 'wyvern start ' + n + ' ' + wg.board[wsq(n)]);
-ok(wg.board[wsq('3a8')] === -DC.G && wg.board[wsq('3i8')] === -DC.G, 'scarlet griffons on the ends of rank 8');
-ok(wg.board[wsq('3a7')] === -DC.Y && wg.board[wsq('3i7')] === -DC.Y, 'scarlet wyverns on rank 7');
-ok(DC.fileLetter(0) === 'a' && DC.fileList().length === 9, 'wyvern 9 files a to i');
+ok(wg.board[wsq('3a8')] === -DC.G && wg.board[wsq('3g8')] === -DC.G, 'scarlet griffons on the ends of rank 8');
+ok(wg.board[wsq('3a7')] === -DC.Y && wg.board[wsq('3g7')] === -DC.Y, 'scarlet wyverns on rank 7');
+ok(DC.fileLetter(0) === 'a' && DC.fileList().length === 7, 'wyvern 7 files a to g');
 ok(!DC.VALID[DC.idx(1, 2, 0)], 'wyvern underworld invalid');
 const wy = (sqs) => { const s = DC.emptyState(); for (const [q, p] of sqs) s.board[q] = p; s.turn = 1; return DC.refresh(s); };
 // Wyvern movement: one or two squares in 8 directions on Sky (jumps allowed); capture only directly below, from afar, no move.
@@ -140,7 +140,7 @@ ok(wOff === 0, 'wyvern moves stay on board and removed pieces never appear: ' + 
 { const ps = wy([[wsq('2e7'), DC.W], [wsq('2a1'), DC.K], [wsq('2a8'), -DC.K]]);
   const pm = DC.legalMoves(ps).find(m => (m & 511) === wsq('2e7') && DC.toObj(m).promo);
   DC.make(ps, pm);
-  ok(ps.board[wsq('2e8')] === DC.P, 'wyvern warrior promotes to paladin'); DC.unmake(ps, pm);
+  ok(ps.board[wsq('2e8')] === DC.O, 'wyvern warrior promotes to oliphant'); DC.unmake(ps, pm);
   ok(ps.board[wsq('2e7')] === DC.W, 'promotion undone'); }
 console.log('wyvern self-play plies:', wPlies, 'endings:', JSON.stringify(wEnds));
 DC.setVariant('dragonchess');
