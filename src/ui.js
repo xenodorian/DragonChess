@@ -8,7 +8,8 @@
     { name: 'Expert', depth: 9, time: 8000, note: 'Deepest search. Thinks for up to 8 seconds per move.' }
   ];
   var REALM = ['', 'Underworld', 'Land', 'Sky'];
-  var KEY = 'dragonchess.v1';
+  var WY = typeof VARIANT_ID !== 'undefined' && VARIANT_ID === 'wyvern';
+  var KEY = WY ? 'wyvern.v1' : 'dragonchess.v1';
   var $ = function (id) { return document.getElementById(id); };
   var cfg = { mode: 'ai', side: 1, level: 1, simG: 0, simS: 0, sound: true };
   var st, moves = [], texts = [], caps = [], legal = [], stat = null;
@@ -72,19 +73,23 @@
   }
   function buildBoards() {
     var root = $('boards'); root.innerHTML = '';
-    for (var L = 3; L >= 1; L--) {
+    var files = DC.fileList(), nf = files.length, base = files[0];
+    var levels = DC.levelNums();
+    for (var li = 0; li < levels.length; li++) {
+      var L = levels[li];
       var wrap = document.createElement('div'); wrap.className = 'bwrap b' + L;
       var lab = document.createElement('div'); lab.className = 'blabel'; lab.textContent = REALM[L];
       var bd = document.createElement('div'); bd.className = 'board';
-      for (var row = 0; row < 8; row++) for (var col = 0; col < 12; col++) {
-        var r = flipped ? row : 7 - row, f = flipped ? 11 - col : col, sq = DC.idx(L, f, r);
+      for (var row = 0; row < 8; row++) for (var col = 0; col < nf; col++) {
+        var r = flipped ? row : 7 - row, f = flipped ? files[nf - 1 - col] : files[col], sq = DC.idx(L, f, r);
         var c = document.createElement('div');
-        c.className = 'cell ' + ((f + r) % 2 === 1 ? 'l' : 'd');
+        c.className = 'cell ' + ((f - base + r) % 2 === 1 ? 'l' : 'd');
         c.setAttribute('data-sq', sq);
         if (col === 0) c.innerHTML += '<span class="coord r">' + (r + 1) + '</span>';
-        if (row === 7) c.innerHTML += '<span class="coord f">' + 'abcdefghijkl'.charAt(f) + '</span>';
+        if (row === 7) c.innerHTML += '<span class="coord f">' + DC.fileLetter(f) + '</span>';
         cells[sq] = c; bd.appendChild(c);
       }
+      bd.style.setProperty('--cols', nf);
       wrap.appendChild(bd); wrap.appendChild(lab); root.appendChild(wrap);
     }
     for (var i = 0; i < 288; i++) if (st.board[i] !== 0) cells[i].appendChild(pieceEl(st.board[i]));
@@ -93,16 +98,16 @@
 
   function refreshMarks() {
     var i, k;
-    for (i = 0; i < 288; i++) cells[i].classList.remove('sel', 'tgt', 'cap', 'rem', 'last', 'check', 'col', 'frozen');
+    for (i = 0; i < 288; i++) if (cells[i]) cells[i].classList.remove('sel', 'tgt', 'cap', 'rem', 'last', 'check', 'col', 'frozen');
     if (moves.length) {
       var lm = moves[moves.length - 1];
       cells[lm & 511].classList.add('last'); cells[(lm >> 9) & 511].classList.add('last');
     }
-    for (i = 96; i < 192; i++) if (DC.isFrozen(st, i)) cells[i].classList.add('frozen');
+    for (i = 96; i < 192; i++) if (cells[i] && DC.isFrozen(st, i)) cells[i].classList.add('frozen');
     if (stat && stat.check) for (i = 0; i < 288; i++) if (st.board[i] === st.turn * DC.K) cells[i].classList.add('check');
     if (sel >= 0) {
       cells[sel].classList.add('sel');
-      for (k = sel % 96; k < 288; k += 96) if (k !== sel) cells[k].classList.add('col');
+      for (k = sel % 96; k < 288; k += 96) if (k !== sel && cells[k]) cells[k].classList.add('col');
       for (k in targets) {
         var o = DC.toObj(targets[k]);
         cells[k].classList.add(o.remote ? 'rem' : (o.capture ? 'cap' : 'tgt'));
@@ -154,8 +159,10 @@
     var wide = W >= 880 && W > H;
     document.body.classList.toggle('wide', wide);
     var top = $('top').offsetHeight + 6 + 30 + 24;
-    var cw = ((wide ? W - 340 : W) - 16 - 18 - 6) / 12;
-    var ch = (H - top - 3 * 6 - 2 * 8 - 8) / 24;
+    var nf = DC.fileList().length, nl = DC.levelNums().length;
+    document.documentElement.style.setProperty('--cols', nf);
+    var cw = ((wide ? W - 340 : W) - 16 - 18 - 6) / nf;
+    var ch = (H - top - (nl - 1) * 6 - (nl - 1) * 8 - 8) / (nl * 8);
     var c = Math.floor(Math.min(cw, ch));
     if (c < 26) c = Math.max(18, Math.floor(Math.min(cw, 32))); // small screens: larger cells, page scrolls
     if (c > 64) c = 64;
@@ -224,7 +231,7 @@
   function makeWorker() {
     try {
       var src = $('engine-src').textContent +
-        '\nonmessage=function(e){var d=e.data;postMessage({id:d.id,r:DC.think(DC.load(d.state),d.opt)});};';
+        '\nonmessage=function(e){var d=e.data;DC.setVariant(d.variant);postMessage({id:d.id,r:DC.think(DC.load(d.state),d.opt)});};';
       var w = new Worker(URL.createObjectURL(new Blob([src], { type: 'text/javascript' })));
       w.onmessage = function (e) { aiDone(e.data.id, e.data.r); };
       w.onerror = function () { useWorker = false; worker = null; if (busy) thinkSync(reqId); };
@@ -242,7 +249,7 @@
     busy = true; reqAt = Date.now(); var id = ++reqId;
     refreshPanel();
     if (useWorker && !worker) worker = makeWorker();
-    if (worker) worker.postMessage({ id: id, state: DC.save(st), opt: aiOpt() });
+    if (worker) worker.postMessage({ id: id, variant: WY ? 'wyvern' : 'dragonchess', state: DC.save(st), opt: aiOpt() });
     else thinkSync(id);
   }
   function aiDone(id, r) {
@@ -322,7 +329,14 @@
     if (!stat.over && !humanTurn()) askAI();
   }
   function buildGuide() {
-    var h = '<ul>' +
+    var h = '<ul>' + (WY ?
+      '<li>Two stacked 10 by 8 boards: Sky (level 3) and Land (level 2). There is no Underworld.</li>' +
+      '<li>Gold moves first. Checkmate the enemy King to win. There is no castling.</li>' +
+      '<li>Tap a piece to see its moves on both boards. Green dot: move. Green ring: capture. Orange ring: Dragon fire (capture from above without moving).</li>' +
+      '<li>White outlines mark the squares directly above and below the selected piece.</li>' +
+      '<li>Wyvern Chess has no Sylph, Mage, Dwarf, Basilisk or Elemental.</li>' +
+      '<li>Draws: stalemate, the same position three times, or 100 moves each with no capture or Warrior move.</li>' +
+      '<li>Notation: piece letter, level, file, rank. Example: W2e2-2e3. A star marks Dragon fire.</li></ul>' :
       '<li>Three stacked 12 by 8 boards: Sky (level 3), Land (level 2) and Underworld (level 1).</li>' +
       '<li>Gold moves first. Checkmate the enemy King to win. There is no castling.</li>' +
       '<li>Tap a piece to see its moves on all three boards. Green dot: move. Green ring: capture. Orange ring: Dragon fire (capture from above without moving).</li>' +
@@ -330,7 +344,7 @@
       '<li>A Basilisk freezes the enemy piece standing directly above it on the Land board.</li>' +
       '<li>Simulation (in the difficulty menu) lets you watch two bots of random difficulty play each other.</li>' +
       '<li>Draws: stalemate, the same position three times, or 100 moves each with no capture or Warrior move.</li>' +
-      '<li>Notation: piece letter, level, file, rank. Example: W2e2-2e3. A star marks Dragon fire.</li></ul>';
+      '<li>Notation: piece letter, level, file, rank. Example: W2e2-2e3. A star marks Dragon fire.</li></ul>');
     GUIDE.forEach(function (g) {
       var t = DC.LETTERS.indexOf(g.letter);
       h += '<div class="gp"><div class="tok"></div><div><h4>' + g.name + ' (' + g.letter + ')<small>' + g.home +
@@ -338,7 +352,8 @@
         g.lines.map(function (l) { return '<li>' + l + '</li>'; }).join('') + '</ul></div></div>';
       h = h.replace('<div class="tok"></div>', '<div class="tok" data-t="' + t + '"></div>');
     });
-    h += '<p class="credits">Dragonchess was designed by Gary Gygax (Dragon Magazine #100, 1985). This is an unofficial fan implementation. ' +
+    h += '<p class="credits">' + (WY ? 'Wyvern Chess is a variant of Dragonchess, which Gary Gygax designed (Dragon Magazine #100, 1985). It is an unofficial fan variant. ' :
+      'Dragonchess was designed by Gary Gygax (Dragon Magazine #100, 1985). This is an unofficial fan implementation. ') +
       'Rules follow Wikipedia and The Chess Variant Pages (E. Jackman, H. Bodlaender). Piece icons by Lorc and Delapouite, ' +
       'game-icons.net, licensed CC BY 3.0.</p>';
     $('guideBody').innerHTML = h;
@@ -348,6 +363,7 @@
 
   /* ---------- wiring ---------- */
   function init() {
+    DC.setVariant(WY ? 'wyvern' : 'dragonchess');
     var saved = restore();
     replay(saved || []);
     SFX.setMuted(!cfg.sound);

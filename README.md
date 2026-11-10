@@ -31,3 +31,7 @@ Or download `index.html` from this repository and open it in any modern browser.
 - Piece icons from [game-icons.net](https://game-icons.net) by Lorc, Delapouite and contributors, licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
 
 This is an unofficial fan implementation. It is not affiliated with the Gygax estate, Wizards of the Coast, or Dragonchess Inc.
+
+## Wyvern Chess
+
+`wyvern.html` is a variant of Dragonchess: two boards (Sky and Land), 10 files wide, with no Underworld and no Sylph or Mage. Play it at https://xenodorian.github.io/DragonChess/wyvern.html. Rules are in `RULES.md`.

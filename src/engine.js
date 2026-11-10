@@ -13,7 +13,27 @@ var DC = (function () {
   function sqLevel(i) { return ((i / 96) | 0) + 1; }
   function sqRank(i) { return ((i % 96) / 12) | 0; }
   function sqFile(i) { return i % 12; }
-  function sqName(i) { return sqLevel(i) + 'abcdefghijkl'.charAt(sqFile(i)) + (sqRank(i) + 1); }
+  function sqName(i) { return sqLevel(i) + fileLetter(sqFile(i)) + (sqRank(i) + 1); }
+
+  /* ---------- Variants ----------
+     Internal grid is always 12 files x 3 levels. VALID marks squares that exist in the variant.
+     Wyvern Chess: no Underworld (level 1), files a and l removed, no Sylph or Mage. */
+  var VARIANT = 'dragonchess';
+  var VALID = new Uint8Array(288);
+  var FILE0 = 0; // internal file index of letter 'a'
+  function setVariant(id) {
+    var i, l, f, wy = id === 'wyvern';
+    VARIANT = wy ? 'wyvern' : 'dragonchess';
+    FILE0 = wy ? 1 : 0;
+    for (i = 0; i < 288; i++) {
+      l = (i / 96) | 0; f = i % 12;
+      VALID[i] = wy ? (l > 0 && f > 0 && f < 11 ? 1 : 0) : 1;
+    }
+  }
+  function fileLetter(f) { return 'abcdefghijkl'.charAt(f - FILE0); }
+  function fileList() { return VARIANT === 'wyvern' ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; }
+  function levelNums() { return VARIANT === 'wyvern' ? [3, 2] : [3, 2, 1]; } // 1-based, top board first
+  setVariant('dragonchess');
 
   /* ---------- Zobrist + piece-square tables ---------- */
   var ZL = new Int32Array(31 * 288), ZH = new Int32Array(31 * 288), PST = new Int16Array(31 * 288);
@@ -73,6 +93,13 @@ var DC = (function () {
     b[idx(3, 2, 7)] = -G; b[idx(3, 10, 7)] = -G; b[idx(3, 6, 7)] = -R;
     b[idx(1, 2, 0)] = B; b[idx(1, 10, 0)] = B; b[idx(1, 6, 0)] = E;
     b[idx(1, 2, 7)] = -B; b[idx(1, 10, 7)] = -B; b[idx(1, 6, 7)] = -E;
+    if (VARIANT === 'wyvern') {
+      // Wyvern: keep the Dragonchess setup on the squares that remain, minus Sylph and Mage.
+      for (var q = 0; q < 288; q++) {
+        var a = b[q] < 0 ? -b[q] : b[q];
+        if (!VALID[q] || a === S || a === M) b[q] = 0;
+      }
+    }
     return refresh(st);
   }
   function save(st) {
@@ -90,7 +117,7 @@ var DC = (function () {
   // mode 0: move or capture, 1: move only, 2: capture only.
   // returns 0 empty, 1 own piece, 2 enemy piece, 3 off board.
   function add(f, r, l, mode) {
-    if (f < 0 || f > 11 || r < 0 || r > 7) return 3;
+    if (f < 0 || f > 11 || r < 0 || r > 7 || !VALID[l * 96 + r * 12 + f]) return 3;
     var to = l * 96 + r * 12 + f, v = gb[to];
     if (v === 0) { if (mode !== 2) gout[gn++] = gfrom | (to << 9) | gflag; return 0; }
     if ((v > 0) === (gs > 0)) return 1;
@@ -440,6 +467,7 @@ var DC = (function () {
     idx: idx, sqLevel: sqLevel, sqRank: sqRank, sqFile: sqFile, sqName: sqName,
     emptyState: emptyState, refresh: refresh, newGame: newGame, save: save, load: load,
     make: make, unmake: unmake, legalMoves: legalMoves, pseudoMoves: pseudoMoves, toObj: toObj,
+    setVariant: setVariant, fileLetter: fileLetter, fileList: fileList, levelNums: levelNums, VALID: VALID,
     inCheck: inCheck, isFrozen: isFrozen, repCount: repCount, status: status, moveText: moveText, think: think
   };
 })();

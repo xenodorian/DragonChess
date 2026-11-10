@@ -65,3 +65,29 @@ Oliphant 5, Hero 4.5, Thief 4, Elemental 4, Basilisk 3, Unicorn 2.5, Dwarf 2, Sy
 - 100 moves by each side without a capture or Warrior move is a draw.
 - A frozen piece cannot move or capture, so it gives no check. A frozen King can still be checkmated.
 - Only the two Kings left is a draw.
+
+---
+
+# Wyvern Chess (variant)
+
+Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
+
+## Differences from Dragonchess
+
+- **Boards:** two boards, Sky (level 3) and Land (level 2). No Underworld (level 1).
+- **Size:** each board is 10 files by 8 ranks, files a to j. The outer files of Dragonchess (a and l) are removed.
+- **Removed pieces:** Sylph, Mage, Dwarf, Basilisk, Elemental. Their rules are not used.
+- **Remaining pieces:** Griffon, Dragon, Warrior, Oliphant, Unicorn, Hero, Thief, Cleric, King, Paladin. Their moves are the Dragonchess rules with every move to or from level 1 removed.
+- **Win, draws, promotion, Dragon remote capture:** unchanged from Dragonchess.
+
+## Start position (Gold; Scarlet mirrors on ranks 8 and 7)
+
+- Sky, rank 1: Griffon b1, Dragon f1, Griffon j1.
+- Land, rank 1: Oliphant a1 is absent. The rank reads Unicorn a1, Hero b1, Thief c1, Cleric d1, empty e1, King f1, Paladin g1, Thief h1, Hero i1, Unicorn j1.
+- Land, rank 2: Warriors a2 to j2.
+
+Notes on this setup:
+
+- The Griffons already start on Sky in Dragonchess (RULES.md, Dragonchess setup, level 3). They are kept on Sky here.
+- The Mage stood on e1 in Dragonchess. Its square is left empty, since no piece replaces it.
+- The outer Land pieces (Oliphant a1 and l1) are removed with the outer files.

@@ -39,7 +39,7 @@ body.wide #main{flex-direction:row;align-items:flex-start;justify-content:center
 .bwrap{display:flex;align-items:stretch}
 .blabel{width:18px;writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;font:700 10px/18px Georgia,serif;letter-spacing:.22em;
   text-transform:uppercase;border-radius:0 6px 6px 0;color:#0b1020}
-.board{display:grid;grid-template-columns:repeat(12,var(--cell));grid-auto-rows:var(--cell);border:3px solid;border-radius:4px;position:relative}
+.board{display:grid;grid-template-columns:repeat(var(--cols,12),var(--cell));grid-auto-rows:var(--cell);border:3px solid;border-radius:4px;position:relative}
 .cell{position:relative;width:var(--cell);height:var(--cell)}
 .b3 .blabel{background:linear-gradient(#cfe6ff,#7fb1e6)}
 .b3 .board{border-color:#bcd8f5;box-shadow:0 0 0 1px #4b79ae,0 6px 22px rgba(90,160,255,.28)}
