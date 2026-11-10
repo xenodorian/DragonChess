@@ -78,7 +78,7 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 - **Size:** each board is 7 files by 8 ranks, files a to g. Dragonchess files a and l were removed, then the files of the Paladins (b and h) were removed. The remaining files are renamed a to g from left to right.
 - **Removed pieces:** Sylph, Mage, Dwarf, Basilisk, Elemental, Paladin, Hero.
 - **Added piece:** Wyvern (letter Y), see below.
-- **Remaining pieces:** Griffon, Dragon, Warrior, Oliphant, Unicorn, Thief, Cleric, King, Wyvern, Aarokocra.
+- **Remaining pieces:** Griffon, Dragon, Warrior, Oliphant, Unicorn, Ranger (the Thief, renamed), Cleric, King, Wyvern, Aarokocra.
 - **King:** on Land it moves and captures like a chess king only. It cannot move up to Sky. (Dragonchess keeps the King's move to Sky.)
 - **Win, draws, Dragon remote capture:** unchanged from Dragonchess.
 - **Promotion (ruling, not in any source):** a Warrior that reaches the far rank becomes an Oliphant. Dragonchess promotes Warriors to Heroes, but Heroes are not in Wyvern Chess.
@@ -89,6 +89,13 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 - **Capture from afar, Land only:** instead of moving, it may capture one enemy piece on Land directly below it. The Wyvern stays where it is, as with the Dragon. The remote capture is a full move.
 - **Ruling (not in any source):** the moves are not blocked, and the Wyvern can capture only the Land square directly below, not squares next to or two away from it.
 - **Value:** 500 (5.0 on the Gygax scale). This is a design estimate. Gygax did not value this piece.
+
+## Ranger (the Thief, letter T)
+
+- **Land only.** Moves or captures like a bishop.
+- **Capture from afar:** instead of moving, it may capture one enemy piece on Sky directly above it. The Ranger stays where it is, and the capture counts as its move.
+- **Ruling (not in any source):** the upward capture is not a move, so the Ranger stays on Land.
+- **Name and icon:** in Wyvern Chess only. Dragonchess keeps the Thief and its icon.
 
 ## Aarokocra (letter A)
 
@@ -103,7 +110,7 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 
 - Sky, rank 1: Griffon a1, Aarokocra c1, Dragon d1, Aarokocra e1, Griffon g1.
 - Sky, rank 2: Wyverns a2 to g2 (the whole rank).
-- Land, rank 1: Unicorn a1, Thief b1, Cleric c1, King d1, Oliphant e1, Thief f1, Unicorn g1.
+- Land, rank 1: Unicorn a1, Ranger b1, Cleric c1, King d1, Oliphant e1, Ranger f1, Unicorn g1.
 - Land, rank 2: Warriors a2 to g2.
 
 Each side has 26 pieces: 12 on Sky and 14 on Land.

@@ -425,6 +425,14 @@ var DC = (function () {
           break;
         case T:
           slide(f, r, l, 1, 1); slide(f, r, l, 1, -1); slide(f, r, l, -1, 1); slide(f, r, l, -1, -1);
+          if (VARIANT === 'wyvern' && l === 1) {
+            // Ranger: capture from afar the Sky square directly above (the Ranger does not move).
+            var ua = 192 + r * 12 + f;
+            if (VALID[ua] && gb[ua] !== 0 && (gb[ua] > 0) !== (gs > 0)) {
+              if (gb[ua] === K || gb[ua] === -K) gking = true;
+              gout[gn++] = gfrom | (ua << 9) | F_REMOTE | F_CAP;
+            }
+          }
           break;
         case C:
           kingSteps(f, r, l);
@@ -916,6 +924,8 @@ var GUIDE = [{"letter":"K","name":"King","value":null,"home":"Land","lines":["On
   }
 
   /* ---------- DOM ---------- */
+  // Wyvern Chess calls the Thief a Ranger.
+  function nameOf(t) { return WY && t === DC.T ? 'Ranger' : DC.NAMES[t]; }
   function pieceEl(p) {
     var d = document.createElement('div');
     d.className = 'piece ' + (p > 0 ? 'gold' : 'scarlet');
@@ -969,7 +979,7 @@ var GUIDE = [{"letter":"K","name":"King","value":null,"home":"Land","lines":["On
   }
   function mini(p) {
     var w = document.createElement('span'); w.className = 'mini'; w.appendChild(pieceEl(p));
-    w.title = DC.NAMES[p > 0 ? p : -p]; return w;
+    w.title = nameOf(p > 0 ? p : -p); return w;
   }
   function refreshPanel() {
     var tok = $('turnTok'), txt;
@@ -1002,7 +1012,7 @@ var GUIDE = [{"letter":"K","name":"King","value":null,"home":"Land","lines":["On
   }
   function showInfo(p, sq) {
     var t = p > 0 ? p : -p, g = guideByLetter[DC.LETTERS.charAt(t)];
-    var s = '<b>' + (p > 0 ? 'Gold ' : 'Scarlet ') + DC.NAMES[t] + '</b> ' + DC.sqName(sq);
+    var s = '<b>' + (p > 0 ? 'Gold ' : 'Scarlet ') + nameOf(t) + '</b> ' + DC.sqName(sq);
     if (DC.isFrozen(st, sq)) s += ' (frozen by Basilisk)';
     else if (g) s += ': ' + g.lines.join(' ');
     $('info').innerHTML = s; $('info').title = g ? g.lines.join(' ') : '';

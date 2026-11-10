@@ -65,6 +65,8 @@
   }
 
   /* ---------- DOM ---------- */
+  // Wyvern Chess calls the Thief a Ranger.
+  function nameOf(t) { return WY && t === DC.T ? 'Ranger' : DC.NAMES[t]; }
   function pieceEl(p) {
     var d = document.createElement('div');
     d.className = 'piece ' + (p > 0 ? 'gold' : 'scarlet');
@@ -118,7 +120,7 @@
   }
   function mini(p) {
     var w = document.createElement('span'); w.className = 'mini'; w.appendChild(pieceEl(p));
-    w.title = DC.NAMES[p > 0 ? p : -p]; return w;
+    w.title = nameOf(p > 0 ? p : -p); return w;
   }
   function refreshPanel() {
     var tok = $('turnTok'), txt;
@@ -151,7 +153,7 @@
   }
   function showInfo(p, sq) {
     var t = p > 0 ? p : -p, g = guideByLetter[DC.LETTERS.charAt(t)];
-    var s = '<b>' + (p > 0 ? 'Gold ' : 'Scarlet ') + DC.NAMES[t] + '</b> ' + DC.sqName(sq);
+    var s = '<b>' + (p > 0 ? 'Gold ' : 'Scarlet ') + nameOf(t) + '</b> ' + DC.sqName(sq);
     if (DC.isFrozen(st, sq)) s += ' (frozen by Basilisk)';
     else if (g) s += ': ' + g.lines.join(' ');
     $('info').innerHTML = s; $('info').title = g ? g.lines.join(' ') : '';

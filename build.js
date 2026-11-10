@@ -11,12 +11,15 @@ const pages = [
   { out: 'index.html', id: 'dragonchess', title: 'Dragonchess', guide: 'guide.json' },
   { out: 'wyvern.html', id: 'wyvern', title: 'Wyvern Chess', guide: 'guide_wyvern.json' }
 ];
+const wyIcons = Object.assign({}, icons, JSON.parse(rd('icons_wyvern.json')));
+const wySymbols = Object.keys(wyIcons).map(k => `<symbol id="pc-${k}" viewBox="0 0 512 512"><path d="${wyIcons[k].d}"/></symbol>`).join('');
 const shared = { CSS: rd('style.css'), SYMBOLS: symbols, FAVICON: fav, ENGINE: rd('engine.js'), SFX: rd('sfx.js'), UI: rd('ui.js') };
 for (const pg of pages) {
   const parts = Object.assign({}, shared, {
     GUIDE: JSON.stringify(JSON.parse(rd(pg.guide))),
     TITLE: pg.title,
     VARIANT_ID: JSON.stringify(pg.id),
+    SYMBOLS: pg.id === 'wyvern' ? wySymbols : symbols,
     CACHE: pg.id === 'wyvern' ? '<meta http-equiv="Cache-Control" content="no-cache">' : ''
   });
   let html = rd('template.html');

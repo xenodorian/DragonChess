@@ -52,11 +52,12 @@
 },
 {
 "letter": "T",
-"name": "Thief",
+"name": "Ranger",
 "value": 4,
 "home": "Land",
 "lines": [
-"On Land only, moves or captures like a bishop."
+"On Land only, moves or captures like a bishop.",
+"Instead of moving, may capture one enemy piece on Sky directly above it. The Ranger does not move when it does this."
 ]
 },
 {

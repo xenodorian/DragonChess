@@ -118,6 +118,13 @@ const wy = (sqs) => { const s = DC.emptyState(); for (const [q, p] of sqs) s.boa
   DC.unmake(pe, pm);
   ok(pe.board[wsq('3c7')] === DC.A && pe.board[wsq('3c8')] === 0, 'aarokocra promotion undone');
 }
+{ const rg = wy([[wsq('2d4'), DC.T], [wsq('3d4'), -DC.W], [wsq('2a1'), DC.K], [wsq('2a8'), -DC.K]]);
+  const rm = DC.legalMoves(rg).filter(m => (m & 511) === wsq('2d4'));
+  ok(rm.some(m => DC.toObj(m).remote && DC.toObj(m).to === wsq('3d4')), 'ranger captures the square directly above');
+  ok(!rm.some(m => !DC.toObj(m).remote && DC.toObj(m).to === wsq('3d4')), 'ranger does not move onto Sky');
+  const rb = wy([[wsq('2d4'), DC.T], [wsq('2a1'), DC.K], [wsq('2a8'), -DC.K]]);
+  ok(!DC.legalMoves(rb).some(m => DC.toObj(m).remote && DC.toObj(m).to === wsq('3d4')), 'ranger cannot capture empty square above');
+}
 // Aarokocra and King rules (Wyvern).
 { const ae = wy([[wsq('3c3'), DC.A], [wsq('2b3'), -DC.W], [wsq('2c2'), -DC.W], [wsq('2d4'), -DC.W], [wsq('2c3'), -DC.W], [wsq('2c5'), -DC.K], [wsq('2a1'), DC.K]]);
   const am = DC.legalMoves(ae).filter(m => (m & 511) === wsq('3c3'));

@@ -201,6 +201,14 @@ var DC = (function () {
           break;
         case T:
           slide(f, r, l, 1, 1); slide(f, r, l, 1, -1); slide(f, r, l, -1, 1); slide(f, r, l, -1, -1);
+          if (VARIANT === 'wyvern' && l === 1) {
+            // Ranger: capture from afar the Sky square directly above (the Ranger does not move).
+            var ua = 192 + r * 12 + f;
+            if (VALID[ua] && gb[ua] !== 0 && (gb[ua] > 0) !== (gs > 0)) {
+              if (gb[ua] === K || gb[ua] === -K) gking = true;
+              gout[gn++] = gfrom | (ua << 9) | F_REMOTE | F_CAP;
+            }
+          }
           break;
         case C:
           kingSteps(f, r, l);
