@@ -13,13 +13,13 @@
   var $ = function (id) { return document.getElementById(id); };
   var cfg = { mode: 'ai', side: 1, level: 1, simG: 0, simS: 0, sound: true };
   var st, moves = [], texts = [], caps = [], legal = [], stat = null;
-  var sel = -1, targets = {}, pendRem = -1, flipped = false, busy = false, worker = null, useWorker = true, reqId = 0, reqAt = 0;
+  var sel = -1, targets = {}, pendRem = -1, flipped = false, side = false, busy = false, worker = null, useWorker = true, reqId = 0, reqAt = 0;
   var cells = new Array(288), guideByLetter = {};
   GUIDE.forEach(function (g) { guideByLetter[g.letter] = g; });
 
   /* ---------- storage ---------- */
   function store() {
-    try { localStorage.setItem(KEY, JSON.stringify({ cfg: cfg, moves: moves, flipped: flipped })); } catch (e) { }
+    try { localStorage.setItem(KEY, JSON.stringify({ cfg: cfg, moves: moves, flipped: flipped, side: side })); } catch (e) { }
   }
   function restore() {
     try {
@@ -31,6 +31,7 @@
       if (o.cfg.level >= 0 && o.cfg.level < LEVELS.length) cfg.level = o.cfg.level | 0;
       cfg.sound = o.cfg.sound !== false;
       flipped = !!o.flipped;
+      side = !!o.side;
       return Array.isArray(o.moves) ? o.moves : null;
     } catch (e) { return null; }
   }
@@ -165,10 +166,26 @@
     var top = $('top').offsetHeight + 6 + 30 + 24;
     var nf = DC.fileList().length, nl = DC.levelNums().length;
     document.documentElement.style.setProperty('--cols', nf);
-    var cw = ((wide ? W - 340 : W) - 16 - 18 - 6) / nf;
-    var ch = (H - top - (nl - 1) * 6 - (nl - 1) * 8 - 8) / (nl * 8);
-    var c = Math.floor(Math.min(cw, ch));
-    if (c < 26) c = Math.max(18, Math.floor(Math.min(cw, 32))); // small screens: larger cells, page scrolls
+    document.body.classList.toggle('side', side);
+    $('bSide').className = side ? 'on' : '';
+    $('bSide').setAttribute('aria-pressed', side ? 'true' : 'false');
+    var cw, ch, c;
+    if (side) {
+      // boards in one row, Sky on the left: every board is a full 8 ranks tall
+      var sideCw = function (w) { return (w - 16 - nl * (18 + 6) - (nl - 1) * 8) / (nf * nl); };
+      ch = (H - top - 6 - 12) / 8;
+      var cBelow = Math.min(sideCw(W), ch, 64), cAside = Math.min(sideCw(W - 340), ch, 64);
+      wide = wide && cAside >= cBelow * 0.85; // keep the side panel only if it costs little board size
+      document.body.classList.toggle('wide', wide);
+      cw = sideCw(wide ? W - 340 : W);
+      c = Math.floor(Math.min(cw, ch));
+      if (c < 18) c = 18; // very narrow screens: the board row scrolls sideways
+    } else {
+      cw = ((wide ? W - 340 : W) - 16 - 18 - 6) / nf;
+      ch = (H - top - (nl - 1) * 6 - (nl - 1) * 8 - 8) / (nl * 8);
+      c = Math.floor(Math.min(cw, ch));
+      if (c < 26) c = Math.max(18, Math.floor(Math.min(cw, 32))); // small screens: larger cells, page scrolls
+    }
     if (c > 64) c = 64;
     document.documentElement.style.setProperty('--cell', c + 'px');
   }
@@ -419,6 +436,7 @@
     $('newStart').onclick = startNew;
     $('bUndo').onclick = undo;
     $('bFlip').onclick = function () { flipped = !flipped; buildBoards(); refreshMarks(); store(); };
+    $('bSide').onclick = function () { side = !side; layout(); store(); };
     $('bSound').onclick = function () { cfg.sound = !cfg.sound; SFX.setMuted(!cfg.sound); refreshPanel(); store(); if (cfg.sound) SFX.play('move'); };
     $('bGuide').onclick = function () { $('dlgGuide').hidden = false; };
     $('guideClose').onclick = function () { $('dlgGuide').hidden = true; };
