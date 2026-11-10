@@ -9,7 +9,7 @@
   ];
   var REALM = ['', 'Underworld', 'Land', 'Sky'];
   var WY = typeof VARIANT_ID !== 'undefined' && VARIANT_ID === 'wyvern';
-  var KEY = WY ? 'wyvern.v1' : 'dragonchess.v1';
+  var KEY = WY ? 'wyvern.v2' : 'dragonchess.v1'; // bump the version when the Wyvern layout changes, so old saves are ignored
   var $ = function (id) { return document.getElementById(id); };
   var cfg = { mode: 'ai', side: 1, level: 1, simG: 0, simS: 0, sound: true };
   var st, moves = [], texts = [], caps = [], legal = [], stat = null;
