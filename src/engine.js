@@ -30,6 +30,8 @@ var DC = (function () {
       VALID[i] = wy ? (l > 0 && f < 7 ? 1 : 0) : 1;
     }
   }
+  // Piece a promoting pawn-like piece becomes (p is the piece being promoted, signed).
+  function promoPiece(p) { return VARIANT === 'wyvern' ? ((p === A || p === -A) ? R : O) : H; }
   function fileLetter(f) { return 'abcdefghijkl'.charAt(f - FILE0); }
   function fileList() { return VARIANT === 'wyvern' ? [0, 1, 2, 3, 4, 5, 6] : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; }
   function levelNums() { return VARIANT === 'wyvern' ? [3, 2] : [3, 2, 1]; } // 1-based, top board first
@@ -71,7 +73,7 @@ var DC = (function () {
 
   /* ---------- State ---------- */
   function emptyState() {
-    return { board: new Int8Array(288), turn: 1, half: 0, lo: 0, hi: 0, score: 0, hl: [], hh: [], ucap: [], uhalf: [], uscore: [] };
+    return { board: new Int8Array(288), turn: 1, half: 0, lo: 0, hi: 0, score: 0, hl: [], hh: [], ucap: [], uhalf: [], uscore: [], upro: [] };
   }
   function refresh(st) {
     var lo = 0, hi = 0, sc = 0, b = st.board;
@@ -238,7 +240,9 @@ var DC = (function () {
           break;
         case A:
           if (l === 2) {
-            add(f, r + fw, 2, 0); add(f - 1, r + fw, 2, 0); add(f + 1, r + fw, 2, 0); // Sky: one square forward or diagonally forward
+            gflag = (r + fw === 7 || r + fw === 0) ? F_PROMO : 0; // Sky: one square forward or diagonally forward
+            add(f, r + fw, 2, 0); add(f - 1, r + fw, 2, 0); add(f + 1, r + fw, 2, 0);
+            gflag = 0;
             var tg = [], q, qf, qr, qs, a1, a2;
             for (q = 0; q < 9; q++) {
               qf = f + AX[q]; qr = r + AY[q];
@@ -291,8 +295,9 @@ var DC = (function () {
     if (m & F_REMOTE) { b[to] = 0; if (m & F_DOUBLE) b[to2] = 0; st.half = 0; }
     else {
       var p = b[from]; k = (p + 17) * 288 + from; lo ^= ZL[k]; hi ^= ZH[k]; sc -= PST[k]; b[from] = 0;
-      var pr = VARIANT === 'wyvern' ? O : H; // Wyvern Warriors promote to Oliphant
+      var pr = promoPiece(p);
       var np = (m & F_PROMO) ? (p > 0 ? pr : -pr) : p;
+      if (m & F_PROMO) st.upro.push(p);
       k = (np + 17) * 288 + to; lo ^= ZL[k]; hi ^= ZH[k]; sc += PST[k]; b[to] = np;
       st.half = (cap !== 0 || p === W || p === -W) ? 0 : st.half + 1;
     }
@@ -302,7 +307,7 @@ var DC = (function () {
     var b = st.board, from = m & 511, to = (m >> 9) & 511, to2 = (m >> 21) & 511, cap2 = (m & F_DOUBLE) ? st.ucap.pop() : 0, cap = st.ucap.pop();
     st.turn = -st.turn;
     if (m & F_REMOTE) { b[to] = cap; if (m & F_DOUBLE) b[to2] = cap2; }
-    else { var p = b[to]; b[from] = (m & F_PROMO) ? (p > 0 ? W : -W) : p; b[to] = cap; }
+    else { var p = b[to]; b[from] = (m & F_PROMO) ? st.upro.pop() : p; b[to] = cap; }
     st.half = st.uhalf.pop(); st.score = st.uscore.pop(); st.lo = st.hl.pop(); st.hi = st.hh.pop();
   }
 
@@ -360,7 +365,7 @@ var DC = (function () {
   function moveText(st, m) {
     var from = m & 511, to = (m >> 9) & 511, p = st.board[from], L = LETTERS.charAt(p > 0 ? p : -p);
     if (m & F_REMOTE) return L + sqName(from) + '×' + sqName(to) + ((m & F_DOUBLE) ? '×' + sqName((m >> 21) & 511) : '') + '*';
-    return L + sqName(from) + ((m & F_CAP) ? '×' : '-') + sqName(to) + ((m & F_PROMO) ? '=H' : '');
+    return L + sqName(from) + ((m & F_CAP) ? '×' : '-') + sqName(to) + ((m & F_PROMO) ? '=' + LETTERS.charAt(promoPiece(p)) : '');
   }
 
   /* ---------- Search ---------- */

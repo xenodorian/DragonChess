@@ -98,7 +98,7 @@
 "lines": [
 "On Sky only, moves or captures one square straight forward or diagonally forward. Never sideways or back.",
 "Instead of moving, may capture up to two enemy pieces on Land: the square directly below, or one of the eight squares next to it.",
-"A capture from afar does not move the Aarokocra. Its value is a design estimate."
+"A capture from afar does not move the Aarokocra. Reaching the far rank by a move promotes it to a Dragon."
 ]
 }
 ]

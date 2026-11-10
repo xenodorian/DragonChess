@@ -110,6 +110,14 @@ ok(wg.board[wsq('3a7')] === -DC.Y && wg.board[wsq('3g7')] === -DC.Y, 'scarlet wy
 ok(DC.fileLetter(0) === 'a' && DC.fileList().length === 7, 'wyvern 7 files a to g');
 ok(!DC.VALID[DC.idx(1, 2, 0)], 'wyvern underworld invalid');
 const wy = (sqs) => { const s = DC.emptyState(); for (const [q, p] of sqs) s.board[q] = p; s.turn = 1; return DC.refresh(s); };
+{ const pe = wy([[wsq('3c7'), DC.A], [wsq('2a1'), DC.K], [wsq('2a8'), -DC.K]]);
+  const pm = DC.legalMoves(pe).find(m => (m & 511) === wsq('3c7') && DC.toObj(m).to === wsq('3c8'));
+  ok(pm !== undefined && DC.toObj(pm).promo, 'aarokocra move to far rank is a promotion');
+  DC.make(pe, pm);
+  ok(pe.board[wsq('3c8')] === DC.R, 'aarokocra promotes to dragon');
+  DC.unmake(pe, pm);
+  ok(pe.board[wsq('3c7')] === DC.A && pe.board[wsq('3c8')] === 0, 'aarokocra promotion undone');
+}
 // Aarokocra and King rules (Wyvern).
 { const ae = wy([[wsq('3c3'), DC.A], [wsq('2b3'), -DC.W], [wsq('2c2'), -DC.W], [wsq('2d4'), -DC.W], [wsq('2c3'), -DC.W], [wsq('2c5'), -DC.K], [wsq('2a1'), DC.K]]);
   const am = DC.legalMoves(ae).filter(m => (m & 511) === wsq('3c3'));

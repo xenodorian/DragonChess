@@ -231,7 +231,7 @@
     el.style.transform = '';
     setTimeout(function () {
       el.classList.remove('moving');
-      if (o.promo) el.querySelector('use').setAttribute('href', WY ? '#pc-O' : '#pc-H');
+      if (o.promo) el.querySelector('use').setAttribute('href', '#pc-' + DC.LETTERS.charAt(Math.abs(st.board[to])));
     }, 320);
   }
   function doMove(m) {
