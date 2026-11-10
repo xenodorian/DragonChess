@@ -83,7 +83,7 @@ var DC = (function () {
   function newGame() {
     var st = emptyState(), b = st.board, f;
     if (VARIANT === 'wyvern') {
-      var wb = [U, H, T, C, K, O, T, H, U];
+      var wb = [U, P, T, C, K, O, T, P, U];
       for (f = 0; f < 9; f++) {
         b[idx(2, f, 0)] = wb[f]; b[idx(2, f, 7)] = -wb[f];
         b[idx(2, f, 1)] = W; b[idx(2, f, 6)] = -W;
@@ -268,7 +268,8 @@ var DC = (function () {
     if (m & F_REMOTE) { b[to] = 0; st.half = 0; }
     else {
       var p = b[from]; k = (p + 16) * 288 + from; lo ^= ZL[k]; hi ^= ZH[k]; sc -= PST[k]; b[from] = 0;
-      var np = (m & F_PROMO) ? (p > 0 ? H : -H) : p;
+      var pr = VARIANT === 'wyvern' ? P : H; // Wyvern Warriors promote to Paladin
+      var np = (m & F_PROMO) ? (p > 0 ? pr : -pr) : p;
       k = (np + 16) * 288 + to; lo ^= ZL[k]; hi ^= ZH[k]; sc += PST[k]; b[to] = np;
       st.half = (cap !== 0 || p === W || p === -W) ? 0 : st.half + 1;
     }
