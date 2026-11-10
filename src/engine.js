@@ -83,7 +83,7 @@ var DC = (function () {
   function newGame() {
     var st = emptyState(), b = st.board, f;
     if (VARIANT === 'wyvern') {
-      var wb = [U, H, T, C, K, P, T, H, U];
+      var wb = [U, H, T, C, K, O, T, H, U];
       for (f = 0; f < 9; f++) {
         b[idx(2, f, 0)] = wb[f]; b[idx(2, f, 7)] = -wb[f];
         b[idx(2, f, 1)] = W; b[idx(2, f, 6)] = -W;

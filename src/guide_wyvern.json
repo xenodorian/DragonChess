@@ -10,17 +10,6 @@
 ]
 },
 {
-"letter": "P",
-"name": "Paladin",
-"value": 10,
-"home": "Land",
-"lines": [
-"On Land, moves or captures like a king or a knight.",
-"On Sky, moves or captures like a king.",
-"Between Land and Sky, makes an unblockable 3D knight leap: one level plus two squares orthogonally."
-]
-},
-{
 "letter": "C",
 "name": "Cleric",
 "value": 9,

@@ -103,7 +103,7 @@ let wGold = 0, wScar = 0, wBad = 0;
 for (let i = 0; i < 288; i++) { const v = wg.board[i]; if (v > 0) wGold++; if (v < 0) wScar++; if (v && !DC.VALID[i]) wBad++; }
 ok(wGold === 30 && wScar === 30, 'wyvern 30 pieces per side: ' + wGold + '/' + wScar);
 ok(wBad === 0, 'wyvern no pieces on removed squares');
-const wantW = { '3a1': 'G', '3i1': 'G', '3e1': 'R', '2a1': 'U', '2b1': 'H', '2c1': 'T', '2d1': 'C', '2e1': 'K', '2f1': 'P', '2g1': 'T', '2h1': 'H', '2i1': 'U', '2a2': 'W', '2i2': 'W', '3a2': 'Y', '3i2': 'Y' };
+const wantW = { '3a1': 'G', '3i1': 'G', '3e1': 'R', '2a1': 'U', '2b1': 'H', '2c1': 'T', '2d1': 'C', '2e1': 'K', '2f1': 'O', '2g1': 'T', '2h1': 'H', '2i1': 'U', '2a2': 'W', '2i2': 'W', '3a2': 'Y', '3i2': 'Y' };
 for (const n in wantW) ok(wg.board[wsq(n)] === DC.LETTERS.indexOf(wantW[n]), 'wyvern start ' + n + ' ' + wg.board[wsq(n)]);
 ok(wg.board[wsq('3a8')] === -DC.G && wg.board[wsq('3i8')] === -DC.G, 'scarlet griffons on the ends of rank 8');
 ok(wg.board[wsq('3a7')] === -DC.Y && wg.board[wsq('3i7')] === -DC.Y, 'scarlet wyverns on rank 7');

@@ -78,7 +78,7 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 - **Size:** each board is 9 files by 8 ranks, files a to i. Files a and l of Dragonchess are removed, and the empty file e (next to the King) is removed too.
 - **Removed pieces:** Sylph, Mage, Dwarf, Basilisk, Elemental.
 - **Added piece:** Wyvern (letter Y), see below.
-- **Remaining pieces:** Griffon, Dragon, Warrior, Oliphant, Unicorn, Hero, Thief, Cleric, King, Paladin, Wyvern.
+- **Remaining pieces:** Griffon, Dragon, Warrior, Oliphant, Unicorn, Hero, Thief, Cleric, King, Wyvern. The Paladin is replaced by an Oliphant on Land's back rank (f1 and f8).
 - **Win, draws, promotion, Dragon remote capture:** unchanged from Dragonchess.
 
 ## Wyvern (letter Y)
@@ -92,7 +92,7 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 
 - Sky, rank 1: Griffon a1, Dragon e1, Griffon i1 (Griffons on the two ends of the board).
 - Sky, rank 2: Wyverns a2 to i2 (the whole rank).
-- Land, rank 1: Unicorn a1, Hero b1, Thief c1, Cleric d1, King e1, Paladin f1, Thief g1, Hero h1, Unicorn i1.
+- Land, rank 1: Unicorn a1, Hero b1, Thief c1, Cleric d1, King e1, Oliphant f1, Thief g1, Hero h1, Unicorn i1.
 - Land, rank 2: Warriors a2 to i2.
 
 Gold has 30 pieces, Scarlet has 30.
