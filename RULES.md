@@ -83,7 +83,7 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 ## Start position (Gold; Scarlet mirrors on ranks 8 and 7)
 
 - Sky, rank 1: Griffon b1, Dragon f1, Griffon j1.
-- Land, rank 1: Oliphant a1 is absent. The rank reads Unicorn a1, Hero b1, Thief c1, Cleric d1, empty e1, King f1, Paladin g1, Thief h1, Hero i1, Unicorn j1.
+- Land, rank 1: Unicorn a1, Hero b1, Thief c1, Cleric d1, empty e1, King f1, Paladin g1, Thief h1, Hero i1, Unicorn j1.
 - Land, rank 2: Warriors a2 to j2.
 
 Notes on this setup:
