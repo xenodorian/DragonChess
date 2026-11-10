@@ -108,12 +108,12 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 
 ## Start position (Gold; Scarlet mirrors on ranks 8 and 7)
 
-- Sky, rank 1: Griffon a1, Aarokocra c1, Dragon d1, Aarokocra e1, Griffon g1.
+- Sky, rank 1: Griffon a1, Aarokocra b1, Aarokocra c1, Dragon d1, Aarokocra e1, Aarokocra f1, Griffon g1.
 - Sky, rank 2: Wyverns a2 to g2 (the whole rank).
 - Land, rank 1: Unicorn a1, Ranger b1, Cleric c1, King d1, Oliphant e1, Ranger f1, Unicorn g1.
 - Land, rank 2: Warriors a2 to g2.
 
-Each side has 26 pieces: 12 on Sky and 14 on Land.
+Each side has 28 pieces: 14 on Sky and 14 on Land.
 
 Notes on this setup:
 
