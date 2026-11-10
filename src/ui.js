@@ -13,7 +13,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var cfg = { mode: 'ai', side: 1, level: 1, simG: 0, simS: 0, sound: true };
   var st, moves = [], texts = [], caps = [], legal = [], stat = null;
-  var sel = -1, targets = {}, flipped = false, busy = false, worker = null, useWorker = true, reqId = 0, reqAt = 0;
+  var sel = -1, targets = {}, pendRem = -1, flipped = false, busy = false, worker = null, useWorker = true, reqId = 0, reqAt = 0;
   var cells = new Array(288), guideByLetter = {};
   GUIDE.forEach(function (g) { guideByLetter[g.letter] = g; });
 
@@ -98,7 +98,7 @@
 
   function refreshMarks() {
     var i, k;
-    for (i = 0; i < 288; i++) if (cells[i]) cells[i].classList.remove('sel', 'tgt', 'cap', 'rem', 'last', 'check', 'col', 'frozen');
+    for (i = 0; i < 288; i++) if (cells[i]) cells[i].classList.remove('sel', 'tgt', 'cap', 'rem', 'last', 'check', 'col', 'frozen', 'pend');
     if (moves.length) {
       var lm = moves[moves.length - 1];
       cells[lm & 511].classList.add('last'); cells[(lm >> 9) & 511].classList.add('last');
@@ -109,9 +109,11 @@
       cells[sel].classList.add('sel');
       for (k = sel % 96; k < 288; k += 96) if (k !== sel && cells[k]) cells[k].classList.add('col');
       for (k in targets) {
-        var o = DC.toObj(targets[k]);
-        cells[k].classList.add(o.remote ? 'rem' : (o.capture ? 'cap' : 'tgt'));
+        var list = targets[k].map(DC.toObj);
+        var kind = list.some(function (o) { return o.remote; }) ? 'rem' : (list.some(function (o) { return o.capture; }) ? 'cap' : 'tgt');
+        cells[k].classList.add(kind);
       }
+      if (pendRem >= 0 && cells[pendRem]) cells[pendRem].classList.add('pend');
     }
   }
   function mini(p) {
@@ -170,16 +172,39 @@
   }
 
   /* ---------- interaction ---------- */
-  function deselect() { sel = -1; targets = {}; }
+  function deselect() { sel = -1; targets = {}; pendRem = -1; }
+  // Targets map square -> list of moves that end there (a double capture is listed under both victims).
   function onCell(sq) {
-    if (sel >= 0 && targets[sq] !== undefined && !busy) { var m = targets[sq]; deselect(); doMove(m); return; }
+    if (sel >= 0 && targets[sq] && !busy) {
+      var ms = targets[sq], singles = ms.filter(function (m) { return !DC.toObj(m).double; });
+      var dbl = ms.filter(function (m) { return DC.toObj(m).double; });
+      if (pendRem >= 0 && pendRem !== sq) {
+        var pair = targets[pendRem] ? targets[pendRem].filter(function (m) {
+          var o = DC.toObj(m); return o.double && (o.to2 === sq || o.to === sq) && (o.to === pendRem || o.to2 === pendRem);
+        }) : [];
+        if (pair.length) { var pm = pair[0]; deselect(); doMove(pm); return; }
+      }
+      if (pendRem === sq) {
+        pendRem = -1;
+        if (singles.length) { var sm = singles[0]; deselect(); doMove(sm); return; }
+        refreshMarks(); return;
+      }
+      if (dbl.length && singles.length) { pendRem = sq; refreshMarks(); return; }
+      if (dbl.length) { pendRem = sq; refreshMarks(); return; }
+      var only = singles[0]; deselect(); doMove(only); return;
+    }
     var p = st.board[sq];
     deselect();
     if (p !== 0) {
       showInfo(p, sq);
       if (!busy && !stat.over && humanTurn() && (p > 0) === (st.turn > 0)) {
         sel = sq;
-        for (var i = 0; i < legal.length; i++) if ((legal[i] & 511) === sq) targets[(legal[i] >> 9) & 511] = legal[i];
+        for (var i = 0; i < legal.length; i++) {
+          if ((legal[i] & 511) !== sq) continue;
+          var o = DC.toObj(legal[i]);
+          (targets[o.to] = targets[o.to] || []).push(legal[i]);
+          if (o.double) (targets[o.to2] = targets[o.to2] || []).push(legal[i]);
+        }
         SFX.play('select');
       }
     }
@@ -189,6 +214,7 @@
     var from = m & 511, to = (m >> 9) & 511, o = DC.toObj(m), victim = pieceIn(to);
     if (o.remote) {
       if (victim) { victim.classList.add('burn'); setTimeout(function () { victim.remove(); }, 460); }
+      if (o.double) { var v2 = pieceIn(o.to2); if (v2) { v2.classList.add('burn'); setTimeout(function () { v2.remove(); }, 460); } }
       return;
     }
     var el = pieceIn(from);

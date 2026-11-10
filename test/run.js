@@ -101,7 +101,7 @@ const wsq = n => DC.idx(+n[0], 'abcdefg'.indexOf(n[1]), +n[2] - 1);
 const wg = DC.newGame();
 let wGold = 0, wScar = 0, wBad = 0;
 for (let i = 0; i < 288; i++) { const v = wg.board[i]; if (v > 0) wGold++; if (v < 0) wScar++; if (v && !DC.VALID[i]) wBad++; }
-ok(wGold === 24 && wScar === 24, 'wyvern 24 pieces per side: ' + wGold + '/' + wScar);
+ok(wGold === 26 && wScar === 26, 'wyvern 26 pieces per side: ' + wGold + '/' + wScar);
 ok(wBad === 0, 'wyvern no pieces on removed squares');
 const wantW = { '3a1': 'G', '3g1': 'G', '3d1': 'R', '2a1': 'U', '2b1': 'T', '2c1': 'C', '2d1': 'K', '2e1': 'O', '2f1': 'T', '2g1': 'U', '2a2': 'W', '2g2': 'W', '3a2': 'Y', '3g2': 'Y' };
 for (const n in wantW) ok(wg.board[wsq(n)] === DC.LETTERS.indexOf(wantW[n]), 'wyvern start ' + n + ' ' + wg.board[wsq(n)]);
@@ -110,6 +110,20 @@ ok(wg.board[wsq('3a7')] === -DC.Y && wg.board[wsq('3g7')] === -DC.Y, 'scarlet wy
 ok(DC.fileLetter(0) === 'a' && DC.fileList().length === 7, 'wyvern 7 files a to g');
 ok(!DC.VALID[DC.idx(1, 2, 0)], 'wyvern underworld invalid');
 const wy = (sqs) => { const s = DC.emptyState(); for (const [q, p] of sqs) s.board[q] = p; s.turn = 1; return DC.refresh(s); };
+// Aarokocra and King rules (Wyvern).
+{ const ae = wy([[wsq('3c3'), DC.A], [wsq('2b3'), -DC.W], [wsq('2c2'), -DC.W], [wsq('2d4'), -DC.W], [wsq('2c3'), -DC.W], [wsq('2c5'), -DC.K], [wsq('2a1'), DC.K]]);
+  const am = DC.legalMoves(ae).filter(m => (m & 511) === wsq('3c3'));
+  ok(am.some(m => DC.toObj(m).double), 'aarokocra double capture generated');
+  ok(!am.some(m => DC.toObj(m).to === wsq('3c2') || DC.toObj(m).to === wsq('3b3') && !DC.toObj(m).remote), 'aarokocra cannot move sideways or back on Sky');
+  ok(am.some(m => DC.toObj(m).to === wsq('3c4') && !DC.toObj(m).remote), 'aarokocra moves forward on Sky');
+  const bef = ae.board.join() + ae.lo + ',' + ae.hi + ',' + ae.score;
+  const dm = am.find(m => DC.toObj(m).double); DC.make(ae, dm);
+  ok(ae.board[wsq('2b3')] === 0 && ae.board[wsq('2c2')] === 0 || ae.board[wsq('2c3')] === 0 || ae.board[wsq('2d4')] === 0, 'double capture removes two Land pieces');
+  DC.unmake(ae, dm);
+  ok(bef === ae.board.join() + ae.lo + ',' + ae.hi + ',' + ae.score, 'double capture unmakes exactly');
+  const ke = wy([[wsq('2d4'), DC.K], [wsq('2a1'), DC.P], [wsq('2a8'), -DC.K]]);
+  ok(!DC.pseudoMoves(ke).some(m => DC.toObj(m).to < 96 + 0 && (DC.toObj(m).to >= 192)), 'wyvern king cannot move up to Sky');
+}
 // Wyvern movement: one or two squares in 8 directions on Sky (jumps allowed); capture only directly below, from afar, no move.
 let t1 = wy([[wsq('3e4'), DC.Y], [wsq('2a8'), -DC.K], [wsq('2a1'), DC.K]]);
 const yt = DC.pseudoMoves(t1).filter(m => m.from === wsq('3e4')).map(m => DC.sqName(m.to) + (m.remote ? 'r' : ''));

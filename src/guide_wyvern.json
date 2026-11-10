@@ -5,8 +5,8 @@
 "value": null,
 "home": "Land",
 "lines": [
-"On Land, moves or captures one king step, or one level straight up to Sky.",
-"On Sky, moves or captures only straight back down to Land."
+"On Land only, moves or captures one king step.",
+"The King cannot move to Sky in Wyvern Chess."
 ]
 },
 {
@@ -88,6 +88,17 @@
 "On Sky only, moves one or two squares in any straight or diagonal direction. It jumps over pieces.",
 "Instead of moving, may capture an enemy piece on Land directly below it. The Wyvern does not move when it does this.",
 "Its value is a design estimate, not from Gygax."
+]
+},
+{
+"letter": "A",
+"name": "Aarokocra",
+"value": null,
+"home": "Sky",
+"lines": [
+"On Sky only, moves or captures any number of squares straight forward or diagonally forward. Never sideways or back.",
+"Instead of moving, may capture up to two enemy pieces on Land: the square directly below, or one of the eight squares next to it.",
+"A capture from afar does not move the Aarokocra. Its value is a design estimate."
 ]
 }
 ]

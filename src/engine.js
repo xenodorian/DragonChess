@@ -1,12 +1,12 @@
 /* Dragonchess rules engine and AI. See RULES.md. Runs in browser, Web Worker and Node. */
 var DC = (function () {
   'use strict';
-  var S = 1, G = 2, R = 3, W = 4, O = 5, U = 6, H = 7, T = 8, C = 9, M = 10, K = 11, P = 12, D = 13, B = 14, E = 15, Y = 16;
-  var LETTERS = ' SGRWOUHTCMKPDBEY';
-  var NAMES = ['', 'Sylph', 'Griffon', 'Dragon', 'Warrior', 'Oliphant', 'Unicorn', 'Hero', 'Thief', 'Cleric', 'Mage', 'King', 'Paladin', 'Dwarf', 'Basilisk', 'Elemental', 'Wyvern'];
+  var S = 1, G = 2, R = 3, W = 4, O = 5, U = 6, H = 7, T = 8, C = 9, M = 10, K = 11, P = 12, D = 13, B = 14, E = 15, Y = 16, A = 17;
+  var LETTERS = ' SGRWOUHTCMKPDBEYA';
+  var NAMES = ['', 'Sylph', 'Griffon', 'Dragon', 'Warrior', 'Oliphant', 'Unicorn', 'Hero', 'Thief', 'Cleric', 'Mage', 'King', 'Paladin', 'Dwarf', 'Basilisk', 'Elemental', 'Wyvern', 'Aarokocra'];
   // Gygax values x100 (King has no value).
-  var VALUE = [0, 100, 500, 800, 100, 500, 250, 450, 400, 900, 1100, 0, 1000, 200, 300, 400, 500]; // Wyvern 500 is a design estimate, not a Gygax value
-  var F_REMOTE = 1 << 18, F_PROMO = 2 << 18, F_CAP = 4 << 18;
+  var VALUE = [0, 100, 500, 800, 100, 500, 250, 450, 400, 900, 1100, 0, 1000, 200, 300, 400, 500, 300]; // Wyvern 500 is a design estimate, not a Gygax value
+  var F_REMOTE = 1 << 18, F_PROMO = 2 << 18, F_CAP = 4 << 18, F_DOUBLE = 1 << 30; // F_DOUBLE: second remote target in bits 21-29
   var INF = 2000000, KC = 1000000, MATE = 30000;
 
   function idx(level, file, rank) { return (level - 1) * 96 + rank * 12 + file; }
@@ -36,11 +36,11 @@ var DC = (function () {
   setVariant('dragonchess');
 
   /* ---------- Zobrist + piece-square tables ---------- */
-  var ZL = new Int32Array(33 * 288), ZH = new Int32Array(33 * 288), PST = new Int16Array(33 * 288);
+  var ZL = new Int32Array(35 * 288), ZH = new Int32Array(35 * 288), PST = new Int16Array(35 * 288);
   var seed = 0x9E3779B9;
   function rnd() { seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5; return seed | 0; }
   var i0;
-  for (i0 = 0; i0 < 33 * 288; i0++) { ZL[i0] = rnd(); ZH[i0] = rnd(); }
+  for (i0 = 0; i0 < 35 * 288; i0++) { ZL[i0] = rnd(); ZH[i0] = rnd(); }
   var ZTL = rnd(), ZTH = rnd();
 
   function bonus(t, l, adv, f) {
@@ -62,10 +62,10 @@ var DC = (function () {
     return 0;
   }
   (function () {
-    for (var t = 1; t <= 16; t++) for (var sq = 0; sq < 288; sq++) {
+    for (var t = 1; t <= 17; t++) for (var sq = 0; sq < 288; sq++) {
       var l = (sq / 96) | 0, r = ((sq % 96) / 12) | 0, f = sq % 12;
-      PST[(t + 16) * 288 + sq] = VALUE[t] + bonus(t, l, r, f);
-      PST[(-t + 16) * 288 + sq] = -(VALUE[t] + bonus(t, l, 7 - r, f));
+      PST[(t + 17) * 288 + sq] = VALUE[t] + bonus(t, l, r, f);
+      PST[(-t + 17) * 288 + sq] = -(VALUE[t] + bonus(t, l, 7 - r, f));
     }
   })();
 
@@ -75,7 +75,7 @@ var DC = (function () {
   }
   function refresh(st) {
     var lo = 0, hi = 0, sc = 0, b = st.board;
-    for (var i = 0; i < 288; i++) if (b[i] !== 0) { var k = (b[i] + 16) * 288 + i; lo ^= ZL[k]; hi ^= ZH[k]; sc += PST[k]; }
+    for (var i = 0; i < 288; i++) if (b[i] !== 0) { var k = (b[i] + 17) * 288 + i; lo ^= ZL[k]; hi ^= ZH[k]; sc += PST[k]; }
     if (st.turn < 0) { lo ^= ZTL; hi ^= ZTH; }
     st.lo = lo; st.hi = hi; st.score = sc;
     return st;
@@ -91,6 +91,7 @@ var DC = (function () {
       }
       b[idx(3, 0, 0)] = G; b[idx(3, 6, 0)] = G; b[idx(3, 3, 0)] = R;
       b[idx(3, 0, 7)] = -G; b[idx(3, 6, 7)] = -G; b[idx(3, 3, 7)] = -R;
+      b[idx(3, 2, 0)] = A; b[idx(3, 4, 0)] = A; b[idx(3, 2, 7)] = -A; b[idx(3, 4, 7)] = -A;
       return refresh(st);
     }
     var back = [O, U, H, T, C, M, K, P, T, H, U, O];
@@ -149,6 +150,7 @@ var DC = (function () {
   }
   var ODX = [1, -1, 0, 0], ODY = [0, 0, 1, -1];
   var YDX = [1, -1, 0, 0, 1, 1, -1, -1], YDY = [0, 0, 1, -1, 1, -1, 1, -1];
+  var AX = [0, 1, -1, 0, 0, 1, 1, -1, -1], AY = [0, 0, 0, 1, -1, 1, -1, 1, -1]; // Aarokocra target squares: centre, then 8 neighbours
 
   function gen(st, out) {
     var b = st.board, side = st.turn, fw = side, i, p, t, l, r, f, k, x, y, res, hr;
@@ -214,7 +216,7 @@ var DC = (function () {
           }
           break;
         case K:
-          if (l === 1) { kingSteps(f, r, 1); add(f, r, 0, 0); add(f, r, 2, 0); }
+          if (l === 1) { kingSteps(f, r, 1); add(f, r, 0, 0); if (VARIANT !== 'wyvern') add(f, r, 2, 0); }
           else add(f, r, 1, 0);
           break;
         case P:
@@ -233,6 +235,26 @@ var DC = (function () {
           break;
         case B:
           add(f, r + fw, l, 0); add(f - 1, r + fw, l, 0); add(f + 1, r + fw, l, 0); add(f, r - fw, l, 1);
+          break;
+        case A:
+          if (l === 2) {
+            slide(f, r, 2, 0, fw); slide(f, r, 2, 1, fw); slide(f, r, 2, -1, fw);
+            var tg = [], q, qf, qr, qs, a1, a2;
+            for (q = 0; q < 9; q++) {
+              qf = f + AX[q]; qr = r + AY[q];
+              if (qf < 0 || qf > 11 || qr < 0 || qr > 7 || !VALID[96 + qr * 12 + qf]) continue;
+              qs = 96 + qr * 12 + qf;
+              if (gb[qs] !== 0 && (gb[qs] > 0) !== (gs > 0)) tg.push(qs);
+            }
+            for (a1 = 0; a1 < tg.length; a1++) {
+              if (gb[tg[a1]] === K || gb[tg[a1]] === -K) gking = true;
+              gout[gn++] = gfrom | (tg[a1] << 9) | F_REMOTE | F_CAP;
+              for (a2 = a1 + 1; a2 < tg.length; a2++) {
+                if (gb[tg[a2]] === K || gb[tg[a2]] === -K) gking = true;
+                gout[gn++] = gfrom | (tg[a1] << 9) | (tg[a2] << 21) | F_REMOTE | F_CAP | F_DOUBLE;
+              }
+            }
+          }
           break;
         case Y:
           if (l === 2) {
@@ -262,23 +284,24 @@ var DC = (function () {
   /* ---------- Make / unmake ---------- */
   function make(st, m) {
     var b = st.board, from = m & 511, to = (m >> 9) & 511, cap = b[to];
-    st.ucap.push(cap); st.uhalf.push(st.half); st.uscore.push(st.score); st.hl.push(st.lo); st.hh.push(st.hi);
+    st.ucap.push(cap); var to2 = (m >> 21) & 511, cap2 = (m & F_DOUBLE) ? b[to2] : 0; if (m & F_DOUBLE) st.ucap.push(cap2); st.uhalf.push(st.half); st.uscore.push(st.score); st.hl.push(st.lo); st.hh.push(st.hi);
     var lo = st.lo, hi = st.hi, sc = st.score, k;
-    if (cap !== 0) { k = (cap + 16) * 288 + to; lo ^= ZL[k]; hi ^= ZH[k]; sc -= PST[k]; }
-    if (m & F_REMOTE) { b[to] = 0; st.half = 0; }
+    if (cap !== 0) { k = (cap + 17) * 288 + to; lo ^= ZL[k]; hi ^= ZH[k]; sc -= PST[k]; }
+    if (cap2 !== 0) { k = (cap2 + 17) * 288 + to2; lo ^= ZL[k]; hi ^= ZH[k]; sc -= PST[k]; }
+    if (m & F_REMOTE) { b[to] = 0; if (m & F_DOUBLE) b[to2] = 0; st.half = 0; }
     else {
-      var p = b[from]; k = (p + 16) * 288 + from; lo ^= ZL[k]; hi ^= ZH[k]; sc -= PST[k]; b[from] = 0;
+      var p = b[from]; k = (p + 17) * 288 + from; lo ^= ZL[k]; hi ^= ZH[k]; sc -= PST[k]; b[from] = 0;
       var pr = VARIANT === 'wyvern' ? O : H; // Wyvern Warriors promote to Oliphant
       var np = (m & F_PROMO) ? (p > 0 ? pr : -pr) : p;
-      k = (np + 16) * 288 + to; lo ^= ZL[k]; hi ^= ZH[k]; sc += PST[k]; b[to] = np;
+      k = (np + 17) * 288 + to; lo ^= ZL[k]; hi ^= ZH[k]; sc += PST[k]; b[to] = np;
       st.half = (cap !== 0 || p === W || p === -W) ? 0 : st.half + 1;
     }
     st.lo = lo ^ ZTL; st.hi = hi ^ ZTH; st.score = sc; st.turn = -st.turn;
   }
   function unmake(st, m) {
-    var b = st.board, from = m & 511, to = (m >> 9) & 511, cap = st.ucap.pop();
+    var b = st.board, from = m & 511, to = (m >> 9) & 511, to2 = (m >> 21) & 511, cap2 = (m & F_DOUBLE) ? st.ucap.pop() : 0, cap = st.ucap.pop();
     st.turn = -st.turn;
-    if (m & F_REMOTE) b[to] = cap;
+    if (m & F_REMOTE) { b[to] = cap; if (m & F_DOUBLE) b[to2] = cap2; }
     else { var p = b[to]; b[from] = (m & F_PROMO) ? (p > 0 ? W : -W) : p; b[to] = cap; }
     st.half = st.uhalf.pop(); st.score = st.uscore.pop(); st.lo = st.hl.pop(); st.hi = st.hh.pop();
   }
@@ -299,7 +322,7 @@ var DC = (function () {
     return out;
   }
   function toObj(m) {
-    return { m: m, from: m & 511, to: (m >> 9) & 511, remote: !!(m & F_REMOTE), promo: !!(m & F_PROMO), capture: !!(m & F_CAP) };
+    return { m: m, from: m & 511, to: (m >> 9) & 511, to2: (m >> 21) & 511, double: !!(m & F_DOUBLE), remote: !!(m & F_REMOTE), promo: !!(m & F_PROMO), capture: !!(m & F_CAP) };
   }
   function pseudoMoves(st) {
     var buf = MV[MAXPLY + 2], n = gen(st, buf), out = [];
@@ -336,7 +359,7 @@ var DC = (function () {
   }
   function moveText(st, m) {
     var from = m & 511, to = (m >> 9) & 511, p = st.board[from], L = LETTERS.charAt(p > 0 ? p : -p);
-    if (m & F_REMOTE) return L + sqName(from) + '×' + sqName(to) + '*';
+    if (m & F_REMOTE) return L + sqName(from) + '×' + sqName(to) + ((m & F_DOUBLE) ? '×' + sqName((m >> 21) & 511) : '') + '*';
     return L + sqName(from) + ((m & F_CAP) ? '×' : '-') + sqName(to) + ((m & F_PROMO) ? '=H' : '');
   }
 
@@ -476,12 +499,12 @@ var DC = (function () {
   }
 
   return {
-    S: S, G: G, R: R, W: W, O: O, U: U, H: H, T: T, C: C, M: M, K: K, P: P, D: D, B: B, E: E, Y: Y,
+    S: S, G: G, R: R, W: W, O: O, U: U, H: H, T: T, C: C, M: M, K: K, P: P, D: D, B: B, E: E, Y: Y, A: A,
     LETTERS: LETTERS, NAMES: NAMES, VALUE: VALUE, MATE: MATE,
     idx: idx, sqLevel: sqLevel, sqRank: sqRank, sqFile: sqFile, sqName: sqName,
     emptyState: emptyState, refresh: refresh, newGame: newGame, save: save, load: load,
     make: make, unmake: unmake, legalMoves: legalMoves, pseudoMoves: pseudoMoves, toObj: toObj,
-    setVariant: setVariant, fileLetter: fileLetter, fileList: fileList, levelNums: levelNums, VALID: VALID,
+    setVariant: setVariant, F_DOUBLE: F_DOUBLE, fileLetter: fileLetter, fileList: fileList, levelNums: levelNums, VALID: VALID,
     inCheck: inCheck, isFrozen: isFrozen, repCount: repCount, status: status, moveText: moveText, think: think
   };
 })();

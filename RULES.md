@@ -78,7 +78,8 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 - **Size:** each board is 7 files by 8 ranks, files a to g. Dragonchess files a and l were removed, then the files of the Paladins (b and h) were removed. The remaining files are renamed a to g from left to right.
 - **Removed pieces:** Sylph, Mage, Dwarf, Basilisk, Elemental, Paladin, Hero.
 - **Added piece:** Wyvern (letter Y), see below.
-- **Remaining pieces:** Griffon, Dragon, Warrior, Oliphant, Unicorn, Thief, Cleric, King, Wyvern.
+- **Remaining pieces:** Griffon, Dragon, Warrior, Oliphant, Unicorn, Thief, Cleric, King, Wyvern, Aarokocra.
+- **King:** on Land it moves and captures like a chess king only. It cannot move up to Sky. (Dragonchess keeps the King's move to Sky.)
 - **Win, draws, Dragon remote capture:** unchanged from Dragonchess.
 - **Promotion (ruling, not in any source):** a Warrior that reaches the far rank becomes an Oliphant. Dragonchess promotes Warriors to Heroes, but Heroes are not in Wyvern Chess.
 
@@ -89,14 +90,22 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 - **Ruling (not in any source):** the moves are not blocked, and the Wyvern can capture only the Land square directly below, not squares next to or two away from it.
 - **Value:** 500 (5.0 on the Gygax scale). This is a design estimate. Gygax did not value this piece.
 
+## Aarokocra (letter A)
+
+- **Sky only, forward moves.** Moves or captures any number of squares straight forward or diagonally forward. It never moves sideways or back.
+- **Capture from afar, Land only:** instead of moving, it may capture up to two enemy pieces on Land. The targets are the square directly below it and the eight squares next to that square. The Aarokocra stays where it is. The capture counts as one full move.
+- **Ruling (not in any source):** the forward moves are not blocked by pieces that are not on the path, and they stop at the first piece they meet, capturing it if it is an enemy.
+- **Value:** 300 (3.0 on the Gygax scale). This is a design estimate.
+- **Two-square captures in the app:** tap one target. If it can be captured alone, that capture happens at once. If a pair is possible, the square is highlighted orange. Tap a second target to capture both, or tap the first target again to capture it alone.
+
 ## Start position (Gold; Scarlet mirrors on ranks 8 and 7)
 
-- Sky, rank 1: Griffon a1, Dragon d1, Griffon g1.
+- Sky, rank 1: Griffon a1, Aarokocra c1, Dragon d1, Aarokocra e1, Griffon g1.
 - Sky, rank 2: Wyverns a2 to g2 (the whole rank).
 - Land, rank 1: Unicorn a1, Thief b1, Cleric c1, King d1, Oliphant e1, Thief f1, Unicorn g1.
 - Land, rank 2: Warriors a2 to g2.
 
-Each side has 24 pieces: 10 on Sky and 14 on Land.
+Each side has 26 pieces: 12 on Sky and 14 on Land.
 
 Notes on this setup:
 
