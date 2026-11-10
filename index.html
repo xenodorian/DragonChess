@@ -311,8 +311,8 @@ var DC = (function () {
         b[idx(2, f, 1)] = W; b[idx(2, f, 6)] = -W;
         b[idx(3, f, 1)] = Y; b[idx(3, f, 6)] = -Y;
       }
-      b[idx(3, 1, 0)] = G; b[idx(3, 8, 0)] = G; b[idx(3, 4, 0)] = R;
-      b[idx(3, 1, 7)] = -G; b[idx(3, 8, 7)] = -G; b[idx(3, 4, 7)] = -R;
+      b[idx(3, 0, 0)] = G; b[idx(3, 8, 0)] = G; b[idx(3, 4, 0)] = R;
+      b[idx(3, 0, 7)] = -G; b[idx(3, 8, 7)] = -G; b[idx(3, 4, 7)] = -R;
       return refresh(st);
     }
     var back = [O, U, H, T, C, M, K, P, T, H, U, O];

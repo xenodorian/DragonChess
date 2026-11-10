@@ -90,7 +90,7 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 
 ## Start position (Gold; Scarlet mirrors on ranks 8 and 7)
 
-- Sky, rank 1: Griffon b1, Dragon e1, Griffon i1.
+- Sky, rank 1: Griffon a1, Dragon e1, Griffon i1 (Griffons on the two ends of the board).
 - Sky, rank 2: Wyverns a2 to i2 (the whole rank).
 - Land, rank 1: Unicorn a1, Hero b1, Thief c1, Cleric d1, King e1, Paladin f1, Thief g1, Hero h1, Unicorn i1.
 - Land, rank 2: Warriors a2 to i2.
@@ -99,5 +99,5 @@ Gold has 30 pieces, Scarlet has 30.
 
 Notes on this setup:
 
-- The Griffons already start on Sky in Dragonchess (level 3). They are kept on Sky here.
+- The Griffons already start on Sky in Dragonchess (level 3). In Wyvern Chess they sit on the two ends of Sky's first rank.
 - The Mage's empty square (e1) was removed with the file.
