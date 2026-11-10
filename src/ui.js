@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   var LEVELS = [
-    { name: 'Novice', depth: 1, noise: 500, note: 'Looks one move ahead and blunders constantly. Good for learning the pieces.' },
+    { name: 'Novice', depth: 1, noise: 1000, note: 'Makes mostly random moves. Good for learning the pieces.' },
     { name: 'Easy', depth: 1, noise: 300, note: 'Sees simple captures but makes frequent mistakes.' },
     { name: 'Medium', depth: 2, noise: 120, note: 'Sees short tactics but still gives pieces away now and then.' },
     { name: 'Hard', depth: 3, noise: 40, time: 1500, note: 'Searches three moves deep. Thinks for up to 1.5 seconds.' },

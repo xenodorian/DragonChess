@@ -25,7 +25,7 @@ Goal: a single self-contained `index.html` Dragonchess game (PC and mobile, offl
 - [x] Five difficulty levels: Novice, Easy, Medium, Hard, Expert (settings in `LEVELS` at the top of `src/ui.js`).
 - [x] UI: three themed boards, move/capture/Dragon-fire highlights across levels, animations, sounds, undo, flip, two-player mode, move list, captured pieces, guide, autosave to localStorage, responsive layout.
 - [x] Tests (154 checks, all pass): every move diagram on the Chess Variant Pages (29 scenarios, quiet moves, captures, remote captures on all 288 squares), starting position, special rules, random self-play consistency, AI sanity.
-- [x] AI levels lowered (Novice: depth 1, noise 500; Easy: depth 1, noise 300; Medium: depth 2, noise 120; Hard: depth 3, noise 40, 1.5 s; Expert: depth 4, 3 s). In 8-game matches each of Easy, Medium and Hard beat the level below. Hard vs Expert and Expert itself were not match-tested.
+- [x] AI levels lowered (Novice: depth 1, noise 1000 (mostly random); Easy: depth 1, noise 300; Medium: depth 2, noise 120; Hard: depth 3, noise 40, 1.5 s; Expert: depth 4, 3 s). In 8-game matches each of Easy, Medium and Hard beat the level below. Hard vs Expert and Expert itself were not match-tested.
 - [x] Browser checks in Chromium from `file://`, desktop 1440x900 and iPhone 13 emulation: 120-ply game against the AI, 400-ply two-player game, undo, flip, guide, reload restore. No page errors.
 
 - [x] GitHub Pages live at https://xenodorian.github.io/DragonChess/ (deployed by the workflow; served file verified byte-identical to `index.html`).
