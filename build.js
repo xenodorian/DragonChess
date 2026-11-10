@@ -16,7 +16,8 @@ for (const pg of pages) {
   const parts = Object.assign({}, shared, {
     GUIDE: JSON.stringify(JSON.parse(rd(pg.guide))),
     TITLE: pg.title,
-    VARIANT_ID: JSON.stringify(pg.id)
+    VARIANT_ID: JSON.stringify(pg.id),
+    CACHE: pg.id === 'wyvern' ? '<meta http-equiv="Cache-Control" content="no-cache">' : ''
   });
   let html = rd('template.html');
   for (const k of Object.keys(parts)) {

@@ -122,7 +122,7 @@ const wy = (sqs) => { const s = DC.emptyState(); for (const [q, p] of sqs) s.boa
   DC.unmake(ae, dm);
   ok(bef === ae.board.join() + ae.lo + ',' + ae.hi + ',' + ae.score, 'double capture unmakes exactly');
   const ke = wy([[wsq('2d4'), DC.K], [wsq('2a1'), DC.P], [wsq('2a8'), -DC.K]]);
-  ok(!DC.pseudoMoves(ke).some(m => DC.toObj(m).to < 96 + 0 && (DC.toObj(m).to >= 192)), 'wyvern king cannot move up to Sky');
+  ok(DC.pseudoMoves(ke).filter(m => m.from === wsq('2d4')).length === 8 && !DC.pseudoMoves(ke).some(m => m.from === wsq('2d4') && m.to >= 192), 'wyvern king on Land has 8 moves and none to Sky');
 }
 // Wyvern movement: one or two squares in 8 directions on Sky (jumps allowed); capture only directly below, from afar, no move.
 let t1 = wy([[wsq('3e4'), DC.Y], [wsq('2a8'), -DC.K], [wsq('2a1'), DC.K]]);
