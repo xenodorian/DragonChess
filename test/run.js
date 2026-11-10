@@ -108,17 +108,20 @@ for (const n in wantW) ok(wg.board[wsq(n)] === DC.LETTERS.indexOf(wantW[n]), 'wy
 ok(wg.board[wsq('3a7')] === -DC.Y && wg.board[wsq('3i7')] === -DC.Y, 'scarlet wyverns on rank 7');
 ok(DC.fileLetter(0) === 'a' && DC.fileList().length === 9, 'wyvern 9 files a to i');
 ok(!DC.VALID[DC.idx(1, 2, 0)], 'wyvern underworld invalid');
-// Wyvern movement: two squares on Sky, jumping allowed; capture two squares away on Land from afar, no move.
 const wy = (sqs) => { const s = DC.emptyState(); for (const [q, p] of sqs) s.board[q] = p; s.turn = 1; return DC.refresh(s); };
-let t1 = wy([[wsq('3e4'), DC.Y], [wsq('3e4') + 1, -DC.W], [wsq('2a8'), -DC.K], [wsq('2a1'), DC.K]]);
+// Wyvern movement: one or two squares in 8 directions on Sky (jumps allowed); capture only directly below, from afar, no move.
+let t1 = wy([[wsq('3e4'), DC.Y], [wsq('2a8'), -DC.K], [wsq('2a1'), DC.K]]);
 const yt = DC.pseudoMoves(t1).filter(m => m.from === wsq('3e4')).map(m => DC.sqName(m.to) + (m.remote ? 'r' : ''));
-ok(['3c4', '3g4', '3e2', '3e6', '3c2', '3g6', '3c6', '3g2'].every(q => yt.indexOf(q) >= 0), 'wyvern sky leaps: ' + yt.join(' '));
-ok(yt.every(q => q[0] === '3' || q.endsWith('r')), 'wyvern never steps to Land by move');
-ok(yt.indexOf('2e4r') < 0, 'wyvern remote targets are two squares away, not adjacent');
-let t2 = wy([[wsq('3e4'), DC.Y], [wsq('2e6'), -DC.W], [wsq('2a1'), DC.K], [wsq('2a8'), -DC.K]]);
-ok(DC.pseudoMoves(t2).some(m => m.from === wsq('3e4') && m.remote && m.to === wsq('2e6')), 'wyvern captures Land piece two squares away from afar');
-let t3 = wy([[wsq('3e4'), DC.Y], [wsq('2e5'), -DC.W], [wsq('2a1'), DC.K], [wsq('2a8'), -DC.K]]);
-ok(!DC.pseudoMoves(t3).some(m => m.from === wsq('3e4') && m.to === wsq('2e5')), 'wyvern cannot capture adjacent Land piece from afar');
+const wantY = ['3d4','3f4','3e3','3e5','3d3','3f5','3d5','3f3','3c4','3g4','3e2','3e6','3c2','3g6','3c6','3g2'];
+ok(wantY.every(q => yt.indexOf(q) >= 0) && yt.length === 16, 'wyvern sky moves 1 or 2 squares in 8 directions: ' + yt.join(' '));
+ok(yt.every(q => q[0] === '3'), 'wyvern never steps to Land by move');
+ok(yt.every(q => !q.endsWith('r')), 'no remote entries without an enemy below');
+let t2 = wy([[wsq('3e4'), DC.Y], [wsq('2e4'), -DC.W], [wsq('2a1'), DC.K], [wsq('2a8'), -DC.K]]);
+ok(DC.pseudoMoves(t2).some(m => m.from === wsq('3e4') && m.remote && m.to === wsq('2e4')), 'wyvern captures Land piece directly below from afar');
+let t3 = wy([[wsq('3e4'), DC.Y], [wsq('2e6'), -DC.W], [wsq('2a1'), DC.K], [wsq('2a8'), -DC.K]]);
+ok(!DC.pseudoMoves(t3).some(m => m.from === wsq('3e4') && m.to === wsq('2e6')), 'wyvern cannot capture two squares away on Land from afar');
+let t4 = wy([[wsq('3e4'), DC.Y], [wsq('2e5'), -DC.W], [wsq('2a1'), DC.K], [wsq('2a8'), -DC.K]]);
+ok(!DC.pseudoMoves(t4).some(m => m.from === wsq('3e4') && m.to === wsq('2e5') && m.remote), 'wyvern cannot capture adjacent Land piece from afar');
 // Wyvern start: gold has legal moves, and random games stay on the board.
 let wPlies = 0, wEnds = {}, wOff = 0;
 for (let game = 0; game < 120; game++) {

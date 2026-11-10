@@ -83,9 +83,9 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 
 ## Wyvern (letter Y)
 
-- **Sky only.** Moves exactly two squares in any of the eight straight or diagonal directions. It jumps over pieces, as the Griffon does. It captures an enemy on Sky the same way.
-- **Capture from afar:** instead of moving, it may capture one enemy piece on Land that is two squares away in any of the eight directions from the square directly below it. The Wyvern stays where it is, as with the Dragon. The remote capture is a full move.
-- **Ruling (not in any source):** the leap is not blocked, and a Wyvern may not capture an adjacent Land piece from afar.
+- **Sky only.** Moves one or two squares in any of the eight straight or diagonal directions. It jumps over pieces, as the Griffon does. It captures an enemy on Sky the same way.
+- **Capture from afar, Land only:** instead of moving, it may capture one enemy piece on Land directly below it. The Wyvern stays where it is, as with the Dragon. The remote capture is a full move.
+- **Ruling (not in any source):** the moves are not blocked, and the Wyvern can capture only the Land square directly below, not squares next to or two away from it.
 - **Value:** 500 (5.0 on the Gygax scale). This is a design estimate. Gygax did not value this piece.
 
 ## Start position (Gold; Scarlet mirrors on ranks 8 and 7)

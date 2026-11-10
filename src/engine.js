@@ -148,6 +148,7 @@ var DC = (function () {
     if (v !== 0 && (v > 0) !== (gs > 0)) { gout[gn++] = gfrom | (to << 9) | F_REMOTE | F_CAP; if (v === K || v === -K) gking = true; }
   }
   var ODX = [1, -1, 0, 0], ODY = [0, 0, 1, -1];
+  var YDX = [1, -1, 0, 0, 1, 1, -1, -1], YDY = [0, 0, 1, -1, 1, -1, 1, -1];
 
   function gen(st, out) {
     var b = st.board, side = st.turn, fw = side, i, p, t, l, r, f, k, x, y, res, hr;
@@ -235,10 +236,10 @@ var DC = (function () {
           break;
         case Y:
           if (l === 2) {
-            add(f + 2, r, 2, 0); add(f - 2, r, 2, 0); add(f, r + 2, 2, 0); add(f, r - 2, 2, 0);
-            add(f + 2, r + 2, 2, 0); add(f + 2, r - 2, 2, 0); add(f - 2, r + 2, 2, 0); add(f - 2, r - 2, 2, 0);
-            remote(f + 2, r); remote(f - 2, r); remote(f, r + 2); remote(f, r - 2);
-            remote(f + 2, r + 2); remote(f + 2, r - 2); remote(f - 2, r + 2); remote(f - 2, r - 2);
+            // Sky: one or two squares in any of the 8 directions (jumps allowed).
+            for (k = 0; k < 8; k++) { add(f + YDX[k], r + YDY[k], 2, 0); add(f + 2 * YDX[k], r + 2 * YDY[k], 2, 0); }
+            // Capture from afar: only the Land square directly below. The Wyvern does not move.
+            remote(f, r);
           }
           break;
         case E:

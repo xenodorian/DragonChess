@@ -31,7 +31,7 @@ Goal: a single self-contained `index.html` Dragonchess game (PC and mobile, offl
 - [x] GitHub Pages live at https://xenodorian.github.io/DragonChess/ (deployed by the workflow; served file verified byte-identical to `index.html`).
 - [x] Simulation mode: a "Simulation" button in the difficulty menu starts a bot-vs-bot game where each bot gets an independently random level (`cfg.simG`, `cfg.simS` in `src/ui.js`). Undo is disabled while watching.
 - [x] Victory screen names both sides with bot difficulty, e.g. "Hard bot defeated novice bot", "Player defeated easy bot" (`overTitle` and `sideName` in `src/ui.js`). Verified in the browser for a full simulated game; the player-vs-bot wording uses the same code path but was not played to a finish.
-- [x] Wyvern Chess (`wyvern.html`): two boards of 9 by 8, no Underworld, no Sylph, Mage, Dwarf, Basilisk or Elemental. Second rank of Sky is Wyverns (letter Y, two-square leaps on Sky, remote capture two squares away on Land). Engine uses a validity mask (`VALID`) and `setVariant`. 22 pieces per side. Tests cover start position, piece removal and 120 random games. Browser-checked: layout, 10 columns, a full simulated game.
+- [x] Wyvern Chess (`wyvern.html`): two boards of 9 by 8, no Underworld, no Sylph, Mage, Dwarf, Basilisk or Elemental. Second rank of Sky is Wyverns (letter Y: moves one or two squares in 8 directions on Sky, jumping allowed; captures from afar only the Land square directly below). Engine uses a validity mask (`VALID`) and `setVariant`. 22 pieces per side. Tests cover start position, piece removal and 120 random games. Browser-checked: layout, 10 columns, a full simulated game.
 
 ## To do / not done
 

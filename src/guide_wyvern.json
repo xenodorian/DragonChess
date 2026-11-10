@@ -107,9 +107,9 @@
 "value": null,
 "home": "Sky",
 "lines": [
-"On Sky only, moves two squares in any straight or diagonal direction. It jumps over pieces.",
-"Instead of moving, may capture an enemy piece on Land that is two squares away in any straight or diagonal direction from the square below it.",
-"A Wyvern capture from afar does not move the Wyvern. Its value is a design estimate, not from Gygax."
+"On Sky only, moves one or two squares in any straight or diagonal direction. It jumps over pieces.",
+"Instead of moving, may capture an enemy piece on Land directly below it. The Wyvern does not move when it does this.",
+"Its value is a design estimate, not from Gygax."
 ]
 }
 ]
