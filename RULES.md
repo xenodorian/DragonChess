@@ -92,9 +92,9 @@ Built from the same engine and interface as Dragonchess. Page: `wyvern.html`.
 
 ## Aarokocra (letter A)
 
-- **Sky only, forward moves.** Moves or captures any number of squares straight forward or diagonally forward. It never moves sideways or back.
+- **Sky only, forward moves.** Moves or captures one square straight forward or diagonally forward. It never moves sideways or back.
 - **Capture from afar, Land only:** instead of moving, it may capture up to two enemy pieces on Land. The targets are the square directly below it and the eight squares next to that square. The Aarokocra stays where it is. The capture counts as one full move.
-- **Ruling (not in any source):** the forward moves are not blocked by pieces that are not on the path, and they stop at the first piece they meet, capturing it if it is an enemy.
+- **Ruling (not in any source):** forward means straight forward or diagonally forward, one square. Pieces on those squares block the move unless they are enemies, which are captured.
 - **Value:** 300 (3.0 on the Gygax scale). This is a design estimate.
 - **Two-square captures in the app:** tap one target. If it can be captured alone, that capture happens at once. If a pair is possible, the square is highlighted orange. Tap a second target to capture both, or tap the first target again to capture it alone.
 

@@ -116,6 +116,7 @@ const wy = (sqs) => { const s = DC.emptyState(); for (const [q, p] of sqs) s.boa
   ok(am.some(m => DC.toObj(m).double), 'aarokocra double capture generated');
   ok(!am.some(m => DC.toObj(m).to === wsq('3c2') || DC.toObj(m).to === wsq('3b3') && !DC.toObj(m).remote), 'aarokocra cannot move sideways or back on Sky');
   ok(am.some(m => DC.toObj(m).to === wsq('3c4') && !DC.toObj(m).remote), 'aarokocra moves forward on Sky');
+  ok(am.filter(m => !DC.toObj(m).remote).map(m => DC.toObj(m).to).sort().join() === [wsq('3b4'), wsq('3c4'), wsq('3d4')].sort().join(), 'aarokocra Sky moves: one square forward or diagonally forward only');
   const bef = ae.board.join() + ae.lo + ',' + ae.hi + ',' + ae.score;
   const dm = am.find(m => DC.toObj(m).double); DC.make(ae, dm);
   ok(ae.board[wsq('2b3')] === 0 && ae.board[wsq('2c2')] === 0 || ae.board[wsq('2c3')] === 0 || ae.board[wsq('2d4')] === 0, 'double capture removes two Land pieces');

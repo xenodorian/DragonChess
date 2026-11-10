@@ -462,7 +462,7 @@ var DC = (function () {
           break;
         case A:
           if (l === 2) {
-            slide(f, r, 2, 0, fw); slide(f, r, 2, 1, fw); slide(f, r, 2, -1, fw);
+            add(f, r + fw, 2, 0); add(f - 1, r + fw, 2, 0); add(f + 1, r + fw, 2, 0); // Sky: one square forward or diagonally forward
             var tg = [], q, qf, qr, qs, a1, a2;
             for (q = 0; q < 9; q++) {
               qf = f + AX[q]; qr = r + AY[q];
